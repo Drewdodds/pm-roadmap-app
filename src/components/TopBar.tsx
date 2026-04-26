@@ -7,6 +7,8 @@ interface Props {
   onSourceFilterChange: (v: 'All' | 'hopper' | 'feature' | 'manual') => void;
   followUpFilter: 'All' | 'NeedsFollowUp' | 'Ready';
   onFollowUpFilterChange: (v: 'All' | 'NeedsFollowUp' | 'Ready') => void;
+  statusFilter: 'All' | 'Active' | 'Committed' | 'Icebox';
+  onStatusFilterChange: (v: 'All' | 'Active' | 'Committed' | 'Icebox') => void;
   search: string;
   onSearchChange: (v: string) => void;
   count: number;
@@ -153,6 +155,22 @@ export const TopBar = (p: Props) => {
                 { value: 'hopper', label: 'Hopper' },
                 { value: 'feature', label: 'Feature DB' },
                 { value: 'manual', label: 'Manual' },
+              ]}
+            />
+          </div>
+
+          <div className="flex items-center gap-2">
+            <span className="text-xs font-medium uppercase tracking-wide text-primary-300">
+              Status
+            </span>
+            <Seg
+              value={p.statusFilter}
+              onChange={p.onStatusFilterChange}
+              options={[
+                { value: 'All', label: 'All' },
+                { value: 'Active', label: 'Active' },
+                { value: 'Committed', label: 'Committed' },
+                { value: 'Icebox', label: 'Icebox' },
               ]}
             />
           </div>

@@ -54,6 +54,7 @@ const normalize = (f: Partial<Feature>): Feature => ({
   notionUrl: f.notionUrl,
   needsFollowUp: f.needsFollowUp ?? false,
   followUpNote: f.followUpNote,
+  planningStatus: (f.planningStatus as Feature['planningStatus']) ?? null,
 });
 
 export const exportJSON = (features: Feature[]): void => {
@@ -80,6 +81,7 @@ export const exportCSV = (features: Feature[]): void => {
     'notionUrl',
     'needsFollowUp',
     'followUpNote',
+    'planningStatus',
   ];
   const rows = features.map((f) => [
     f.id,
@@ -94,6 +96,7 @@ export const exportCSV = (features: Feature[]): void => {
     f.notionUrl ?? '',
     f.needsFollowUp ? '1' : '0',
     csvCell(f.followUpNote ?? ''),
+    f.planningStatus ?? '',
   ]);
   const csv = [headers.join(','), ...rows.map((r) => r.join(','))].join('\n');
   const blob = new Blob([csv], { type: 'text/csv' });
