@@ -1,0 +1,1954 @@
+[
+  {
+    "id": "e2427fe9-8476-4788-b803-05b340d482bb",
+    "name": "Build a Quarantine Zone for Violated Events",
+    "aor": "Application",
+    "arr": 558754,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "feature",
+    "notionUrl": "https://www.notion.so/314f2b415dd0804395ebc2ce3ca41eb3"
+  },
+  {
+    "id": "3b704190-24f2-48f7-9754-fe9a0a0551f7",
+    "name": "Warehouse Schema Management",
+    "aor": "Application",
+    "arr": 3586064,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "feature",
+    "notionUrl": "https://www.notion.so/2f5f2b415dd080fdbdaae673a6cf9c84"
+  },
+  {
+    "id": "8e584cd4-fef1-4439-8959-f8d303cfe0b6",
+    "name": "Product Analytics Use Cases and Event Registry - Phase 1",
+    "aor": "Application",
+    "arr": 0,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "feature",
+    "notionUrl": "https://www.notion.so/335f2b415dd080e38e5bded176e63c2b"
+  },
+  {
+    "id": "8f531c91-e175-4324-9389-ccb44553b94e",
+    "name": "ID stitcher - Cardinality rule filtering support for BigQuery",
+    "aor": "Application",
+    "arr": 39000,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "feature",
+    "notionUrl": "https://www.notion.so/341f2b415dd0804f8da0f72415560f34"
+  },
+  {
+    "id": "366253b5-01c1-4097-8c13-6ea93bb56e29",
+    "name": "PII Management",
+    "aor": "Application",
+    "arr": 249000,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "feature",
+    "notionUrl": "https://www.notion.so/2b5f2b415dd080f79f54c00a1abefee8"
+  },
+  {
+    "id": "0371573c-deb5-4ecc-a6a8-bd5bf2bb40d6",
+    "name": "TOTP Based MFA Support",
+    "aor": "Application",
+    "arr": 86360,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "feature",
+    "notionUrl": "https://www.notion.so/2a7f2b415dd08081b3c3f6c34618bcd1"
+  },
+  {
+    "id": "22d95e70-16e5-45cc-b063-2657d661f7cc",
+    "name": "Iterable Integration Identity Management Review",
+    "aor": "Application",
+    "arr": 0,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "feature",
+    "notionUrl": "https://www.notion.so/2bcf2b415dd0800495f3f30af5947908"
+  },
+  {
+    "id": "0a73a494-3f60-4bbc-bc23-6dc70dbd6ff6",
+    "name": "High volume Alert - similar to low volume alerts that we provide today.",
+    "aor": "Application",
+    "arr": 140687,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "feature",
+    "notionUrl": "https://www.notion.so/2eef2b415dd08037b8a1f7a97759466c"
+  },
+  {
+    "id": "5886e1d3-9653-450b-a512-d56c73b661a6",
+    "name": "Data Mapper",
+    "aor": "Application",
+    "arr": 0,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "feature",
+    "notionUrl": "https://www.notion.so/2c0f2b415dd08069baabe315dc636266"
+  },
+  {
+    "id": "e3f304a3-f879-44fb-9207-584548939659",
+    "name": "Custom types UI",
+    "aor": "Application",
+    "arr": 0,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "feature",
+    "notionUrl": "https://www.notion.so/2c0f2b415dd08072b263f05752e06af7"
+  },
+  {
+    "id": "159b579f-e0d2-4655-95e3-5ca34fcf3583",
+    "name": "Braze - Review and Improve Identity Resolution Flow with Braze",
+    "aor": "Application",
+    "arr": 60000,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "feature",
+    "notionUrl": "https://www.notion.so/2bff2b415dd080339daff7e94964f3c0"
+  },
+  {
+    "id": "e68e3ab5-4c9c-421f-9be2-76baae32bd9c",
+    "name": "Tracking plan Version Pinning",
+    "aor": "Application",
+    "arr": 558754,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "feature",
+    "notionUrl": "https://www.notion.so/2d1f2b415dd080028af9c36d728b05a2"
+  },
+  {
+    "id": "c8de6f59-01eb-42f1-8fbe-752e9560d37a",
+    "name": "Trackingplan alert management",
+    "aor": "Application",
+    "arr": 25000,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "feature",
+    "notionUrl": "https://www.notion.so/314f2b415dd0800ca565f1b3abdc3f4b"
+  },
+  {
+    "id": "dbb837bb-c72b-4a96-8e05-1890887ac12a",
+    "name": "Bot Management - Custom Bot list",
+    "aor": "Application",
+    "arr": 591244,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "feature",
+    "notionUrl": "https://www.notion.so/314f2b415dd080e58336e770e0e8cc77"
+  },
+  {
+    "id": "7a517a4a-acc7-447f-825a-2fd431863c5b",
+    "name": "Tracking plan - Global rules expanded for payload outside properties like context",
+    "aor": "Application",
+    "arr": 245000,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "feature",
+    "notionUrl": "https://www.notion.so/313f2b415dd08047a250de0ca747a3a8"
+  },
+  {
+    "id": "61061ac6-9f47-4789-aad0-bcf4be862550",
+    "name": "SSO Self-serve",
+    "aor": "Application",
+    "arr": 0,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "feature",
+    "notionUrl": "https://www.notion.so/311f2b415dd08079bc0cf519f3735bfb"
+  },
+  {
+    "id": "08c3e24a-163c-49b3-8529-1a87e0bcd838",
+    "name": "Import from source into existing tracking plans",
+    "aor": "Application",
+    "arr": 92500,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "feature",
+    "notionUrl": "https://www.notion.so/311f2b415dd080c2b146f8f4731527a7"
+  },
+  {
+    "id": "9239980b-23ba-4ac1-a0e2-52e1c9ff6ba2",
+    "name": "Trackingplan violation management",
+    "aor": "Application",
+    "arr": 932789,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "feature",
+    "notionUrl": "https://www.notion.so/30cf2b415dd080408e9ae71bbf57c813"
+  },
+  {
+    "id": "58e8b008-7e9a-4d32-a2e8-de52455bd12b",
+    "name": "Primary Contact(/Billing Contact) in UI",
+    "aor": "Application",
+    "arr": 0,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "feature",
+    "notionUrl": "https://www.notion.so/2f0f2b415dd0800e9f2cd7a698b874fc"
+  },
+  {
+    "id": "c2bd5572-a895-4230-9573-0c249e95ebdc",
+    "name": "Do not create new org/workspace when user signs up.",
+    "aor": "Application",
+    "arr": 0,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "feature",
+    "notionUrl": "https://www.notion.so/2eef2b415dd0806b8cdfdac3eeb035ea"
+  },
+  {
+    "id": "af943147-dced-4b5b-98e5-8f82995a5626",
+    "name": "Support for external geolocation database of Custom MaxMind License.",
+    "aor": "Application",
+    "arr": 0,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "feature",
+    "notionUrl": "https://www.notion.so/2e8f2b415dd080dbb9cfd741cd7f7292"
+  },
+  {
+    "id": "33f427f8-60fc-4077-a3a2-3829f013d9b6",
+    "name": "Custom types beta",
+    "aor": "Application",
+    "arr": 0,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "feature",
+    "notionUrl": "https://www.notion.so/2c0f2b415dd08023b356e3a62a08ab01"
+  },
+  {
+    "id": "c7b564df-c16e-495b-910d-b33ca488b72f",
+    "name": "Better linking for Monitoring and Alerts Emails",
+    "aor": "Application",
+    "arr": 0,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/334f2b415dd081f89d07d932cddce01c"
+  },
+  {
+    "id": "7d278bab-3bc4-4391-b8e0-2bd53b0f88f3",
+    "name": "Allow smaller time windows for tracking plan violation filtering (below 2 hours)",
+    "aor": "Application",
+    "arr": 91000,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/333f2b415dd08112ba3ec366da70e3c2"
+  },
+  {
+    "id": "0c4f3166-d372-4638-87b0-3e4f926e806a",
+    "name": "Event Utilization Visibility",
+    "aor": "Application",
+    "arr": 0,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/32ef2b415dd08176a793c122db69df0c"
+  },
+  {
+    "id": "49669fe5-5750-47c7-8834-7c7959b201c9",
+    "name": "Self Serve Workspace Creation",
+    "aor": "Application",
+    "arr": 0,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/32df2b415dd0811ea5f2f5837836ce78"
+  },
+  {
+    "id": "2eb9bd9d-2840-4a41-9d66-d7c67fa9e18c",
+    "name": "Ability to view and update data retention account in webapp",
+    "aor": "Application",
+    "arr": 0,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/328f2b415dd08168bbc8cf08c575fbae"
+  },
+  {
+    "id": "949af996-d523-4920-aedd-7a6db1c635e0",
+    "name": "Proposal: Add a button on the UI to trigger a full run of the ID Stitcher.",
+    "aor": "Profiles",
+    "arr": 0,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/328f2b415dd081189f9ad7c5c5eb1378"
+  },
+  {
+    "id": "acca91ac-aed8-4a5e-91dd-259437188d24",
+    "name": "1. Events Tab in Control Plane should allow filtering by either Event Name or Event Type 2. Event volume graph should change to reflect filtered event list",
+    "aor": "Application",
+    "arr": 0,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/327f2b415dd081a4a29fcf443607b252"
+  },
+  {
+    "id": "949a87ef-fc8c-467c-b1ec-2d25e7fd745c",
+    "name": "Bot management to detect LLM bots",
+    "aor": "Application",
+    "arr": 109600,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/31ff2b415dd0814aa47bebdc02f17735"
+  },
+  {
+    "id": "2d0df24c-1792-4d73-b23a-d91f6aa255c3",
+    "name": "Add Rippling as an IdP for SCIM",
+    "aor": "Application",
+    "arr": 39520,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/31ff2b415dd081f1aa69dabb783b2be0"
+  },
+  {
+    "id": "f4d2f115-d3c2-4c58-bc51-353137c504d7",
+    "name": "Event Filtering by Property Values",
+    "aor": "Application",
+    "arr": 558754,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/31af2b415dd081dda8f5f65b6afdb465"
+  },
+  {
+    "id": "51e5c251-9f6f-400e-ac6b-c81fbb87e5cb",
+    "name": "rETL alerts should evaluate failures on a per-job basis, not per-hour",
+    "aor": "Application",
+    "arr": 195270,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/318f2b415dd081cbb6a0d86503908460"
+  },
+  {
+    "id": "d5a3e33d-d7ec-49b0-a48b-25ecc63b41cb",
+    "name": "Warehouse column type inference should respect tracking plan schema definitions",
+    "aor": "Application",
+    "arr": 374035,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/313f2b415dd081f9811cd66b7f81d24d"
+  },
+  {
+    "id": "78f254f0-3a8e-4024-a963-8689daa26b01",
+    "name": "Schema enforcement toggle to prevent column creation on data type mismatch in warehouse destinations",
+    "aor": "Application",
+    "arr": 558754,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/312f2b415dd081699d90fa833974f4aa"
+  },
+  {
+    "id": "e017e5b7-1f4a-4875-baa4-e9c351c4d8c5",
+    "name": "Allow signup with google during accept invitation in RudderStack webapp",
+    "aor": "Application",
+    "arr": 30000,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/312f2b415dd081ab863ad790708f3e44"
+  },
+  {
+    "id": "4d1e5a5b-c860-466f-85f6-2071b4483a49",
+    "name": "Consent Management status overview exposed in UI",
+    "aor": "Application",
+    "arr": 126500,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/311f2b415dd08117803eff46670d0340"
+  },
+  {
+    "id": "6c49435b-66d7-4689-94a1-e7ccd9e34642",
+    "name": "Centralize Consent Management in Control Plan",
+    "aor": "Application",
+    "arr": 0,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/30cf2b415dd081d6bd5bc52e1f0bcbb1"
+  },
+  {
+    "id": "2b35c431-8f79-4c21-97ab-7c25d1d60652",
+    "name": "Tracking plan Violation Management",
+    "aor": "Application",
+    "arr": 374035,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/30cf2b415dd080b19cece02eacd9f1fb"
+  },
+  {
+    "id": "bcaae68f-c11e-4aff-9a2b-3655a5b136d3",
+    "name": "Events Graph – Additional Time Range Options",
+    "aor": "Application",
+    "arr": 558754,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/30cf2b415dd08147abbdd8de646db429"
+  },
+  {
+    "id": "d8f45181-d6a8-41b1-b146-15e75bcce9fe",
+    "name": "JSON Schema for editor autocomplete for our YAMLs",
+    "aor": "Application",
+    "arr": 374035,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/30bf2b415dd0814eb5a5eb0fef3b8fd1"
+  },
+  {
+    "id": "19ea002b-e1f0-4d57-9b5c-9017d5bdc933",
+    "name": "Enhanced SCIM User Provisioning Feature Request",
+    "aor": "Application",
+    "arr": 93450,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/306f2b415dd081a5a90fe743d4704afd"
+  },
+  {
+    "id": "68242180-6c2a-43ea-8d06-08c8dfa4b19e",
+    "name": "Improve Product Usage Dashboard",
+    "aor": "Application",
+    "arr": 277000,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/303f2b415dd08161afbdf4ae05effada"
+  },
+  {
+    "id": "9bfe7830-9302-453d-aa93-38884af1836f",
+    "name": "Drop events with fields containing sql ingestion strings/prototype pollution fields",
+    "aor": "Application",
+    "arr": 932789,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/2fdf2b415dd081b0ae63dafd31e5ec67"
+  },
+  {
+    "id": "81be888b-fe42-4bb6-b05f-441c12a11ea3",
+    "name": "need to provide a way to view and update existing credentials for data retention.",
+    "aor": "Application",
+    "arr": 550000,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/2f1f2b415dd0811b9d13e8949e99929d"
+  },
+  {
+    "id": "f5363e9f-6d70-4265-9125-4cb72d55d75b",
+    "name": "Bring visibility of pending/backlog event count per destination. Give ability to configure alerts based on backlog.",
+    "aor": "Application",
+    "arr": 0,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/2f0f2b415dd0811ca97ded2911de328e"
+  },
+  {
+    "id": "db602937-d327-4ce3-99b2-59e31b6f93fc",
+    "name": "SSO Self-Serve",
+    "aor": "Application",
+    "arr": 0,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/2eff2b415dd081eabd31e9b1f4bb1adf"
+  },
+  {
+    "id": "71a4cefd-5782-4923-8e61-41a168780652",
+    "name": "Sample Event Preview in Sources",
+    "aor": "Application",
+    "arr": 249000,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/2e9f2b415dd0812ba4c4cb0a72425efb"
+  },
+  {
+    "id": "418a2691-7b73-4a25-b3d0-f94949695846",
+    "name": "Pipeline Inspector - Unified Event Tracing View",
+    "aor": "Application",
+    "arr": 802354,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/2e9f2b415dd0816d8da9c37a8c431788"
+  },
+  {
+    "id": "2912a78c-cb6b-4885-b90e-eb5b89e21839",
+    "name": "One-Click Add Events to Tracking Plan from Violations / Catalog",
+    "aor": "Application",
+    "arr": 92500,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/2e8f2b415dd081df87a3f89ee1ebc848"
+  },
+  {
+    "id": "972c80b5-2856-4704-8430-9de6cf6d83db",
+    "name": "Flexible Alert Comparison Windows (Week-over-Week Volume Alerts)",
+    "aor": "Application",
+    "arr": 0,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/2e8f2b415dd0815ebfe4db64fae1cb46"
+  },
+  {
+    "id": "d94a0a98-e115-4c3c-9883-e3f34170a455",
+    "name": "Observability for suppressed users",
+    "aor": "Application",
+    "arr": 126500,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/2e8f2b415dd08114835def326e060756"
+  },
+  {
+    "id": "e3e645d7-d8e7-4852-94ee-abeb4a005ea8",
+    "name": "Self-Serve account deletion.",
+    "aor": "Application",
+    "arr": 0,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/2e3f2b415dd0814d873cdee8aef8c3c7"
+  },
+  {
+    "id": "55eb7234-5eda-4fe4-b952-f626b24bdfd3",
+    "name": "RudderStack Event Quarantine Feature Request",
+    "aor": "Application",
+    "arr": 1038289,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/2e1f2b415dd081aaae66f2a0bd01f205"
+  },
+  {
+    "id": "b85ee9c3-2f45-491e-879a-746c30ad1dc4",
+    "name": "feature request: block IP address transmission to destinations via dashboard",
+    "aor": "Application",
+    "arr": 249000,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/2cef2b415dd0819faa5ffbd3a4aa6ab6"
+  },
+  {
+    "id": "a8ec9bc4-b918-43e0-9974-c59af7b85cff",
+    "name": "Global Privacy Control integration for consent management",
+    "aor": "Application",
+    "arr": 44000,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/2cdf2b415dd08116962fc75aff1cac20"
+  },
+  {
+    "id": "3e6c7dfd-1e9a-460e-ab59-7be2b290e73b",
+    "name": "Support IDP initiated SSO auth for Okta & Azure SAML SSO login. IDP initiated auth is less secure but customers asked it in the past.",
+    "aor": "Application",
+    "arr": 0,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/2cdf2b415dd081a297aae63d41c1e8d9"
+  },
+  {
+    "id": "dff50cef-3015-4222-9a06-ef86a02d5ab2",
+    "name": "Destination-aware tracking plans",
+    "aor": "Application",
+    "arr": 558754,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/2ccf2b415dd0816bb71cc1e2e2989c1b"
+  },
+  {
+    "id": "43d88d76-4dd6-42c0-86a2-e72094de2e82",
+    "name": "[Lovable] oneOf functionality in tracking plans",
+    "aor": "Application",
+    "arr": 374035,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/2c5f2b415dd0819fb674cc5d8f1faa7d"
+  },
+  {
+    "id": "d18c86c8-8771-4ac9-9624-cf774264ebb1",
+    "name": "Ability to update data retention account in place instead of disconnecting first",
+    "aor": "Application",
+    "arr": 550000,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/2bef2b415dd081b5bd9af98e96ca6455"
+  },
+  {
+    "id": "ce484567-bbdf-4f10-8fe7-853fbe665c9b",
+    "name": "High volume Alert - similar to low volume alerts that we provide today.",
+    "aor": "Application",
+    "arr": 140687,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/2bef2b415dd081d58fb1d3e16ff2a3b9"
+  },
+  {
+    "id": "5efd2473-8f1e-4915-9a07-c78b6ce84067",
+    "name": "Do not create new org/workspace when user signs up.",
+    "aor": "Application",
+    "arr": 0,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/2bdf2b415dd0810abf76fc39b752848b"
+  },
+  {
+    "id": "4da9ef93-1681-4aec-9c95-f339d4809cc6",
+    "name": "Customer success team downgrades churned customers to our free tier. In some cases, we need to completely disable the service to a customer (past due, agency owned the agreement, etc.)",
+    "aor": "Application",
+    "arr": 0,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/2bcf2b415dd081c496d8f92e8a9f2e1a"
+  },
+  {
+    "id": "fc42b335-a69f-4d5b-911f-a180e281bc92",
+    "name": "Add filter on the Live Event viewer",
+    "aor": "Application",
+    "arr": 358400,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/2b8f2b415dd081e7a745ecb6d1f97c0e"
+  },
+  {
+    "id": "bfda4a5b-9617-4741-9ed5-088a145cf277",
+    "name": "Include failure stage on Health dashboard flyout. Currently users can't differentiate UT/Router failures.",
+    "aor": "Application",
+    "arr": 0,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/2b7f2b415dd08165b3dcdf3e12e642fa"
+  },
+  {
+    "id": "4c4f99b7-0489-43b5-94d4-b04380449fa2",
+    "name": "Show sample events of successful events too.",
+    "aor": "Application",
+    "arr": 27000,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/2b7f2b415dd08125ab30ddd7e3b5c582"
+  },
+  {
+    "id": "55972a8f-0898-4469-bba2-0090d820226a",
+    "name": "Explore alternatives for independent event modifications in tracking plans",
+    "aor": "Application",
+    "arr": 0,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/2b6f2b415dd08176bc89ec5537467ff0"
+  },
+  {
+    "id": "b7646d64-507e-4cc5-a3e6-62cec16d2184",
+    "name": "Prevent new org account creation for non-member SSO logins",
+    "aor": "Application",
+    "arr": 80000,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/2b6f2b415dd081bb9a1ecaa11d75f9e1"
+  },
+  {
+    "id": "0f706512-d9ff-448c-b71c-fbf224617030",
+    "name": "Check for compliance proof with WCAG 2.2 AA and WAD",
+    "aor": "Application",
+    "arr": 0,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/2b6f2b415dd081fd9a19ef85f64bac33"
+  },
+  {
+    "id": "66a1af96-456a-4008-9b6e-d8d78580e206",
+    "name": "Disable free tier workspace creation for Google Sign-In users",
+    "aor": "Application",
+    "arr": 581800,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/2b6f2b415dd08193a976c57f1db810ba"
+  },
+  {
+    "id": "e30f3cd6-a8c4-4ee5-9a7a-dcd948827fbb",
+    "name": "Add alerts feature to the Tracking plan",
+    "aor": "Application",
+    "arr": 25000,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/2b6f2b415dd0819a8dd1fc967587004c"
+  },
+  {
+    "id": "8ece9ba5-036e-48e9-b0df-53c4c7886cee",
+    "name": "Event-rule variants in Tracking Plan UI and rules on fields outside properties",
+    "aor": "Application",
+    "arr": 0,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/2b6f2b415dd08100b99aee8f623e35f2"
+  },
+  {
+    "id": "2c9297b8-48ae-4424-ac2d-61c3a97701f5",
+    "name": "Add user transformation latency metric to web app",
+    "aor": "Application",
+    "arr": 0,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/2b6f2b415dd0818a8d4cf89b5b8e098a"
+  },
+  {
+    "id": "5f16243f-c51f-4f24-899d-63ba2f075471",
+    "name": "IAM role support for warehouses",
+    "aor": "Application",
+    "arr": 0,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/2b6f2b415dd0819da56fcc04abbf658a"
+  },
+  {
+    "id": "53d63fc2-fb31-4bb6-93b7-1f0809492db1",
+    "name": "Warehouse Data Monitoring and Alerts",
+    "aor": "Application",
+    "arr": 199600,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/2b6f2b415dd0811abc66fccc184a9c31"
+  },
+  {
+    "id": "2445ddfc-f728-42a0-ba54-89b400694ab4",
+    "name": "Enhance UI flow for WH account and async API validation",
+    "aor": "Application",
+    "arr": 0,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/2b6f2b415dd08143b63de1a58009db7c"
+  },
+  {
+    "id": "e76d48ff-4fdb-4672-a5bb-90eb1b88d987",
+    "name": "Skip Traits in Event Table",
+    "aor": "Application",
+    "arr": 0,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/2b6f2b415dd081878259f4c6065e814c"
+  },
+  {
+    "id": "d2273968-9774-4ead-ac99-d1e706d3e7e7",
+    "name": "Support username configuration for Redis",
+    "aor": "Application",
+    "arr": 0,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/2b6f2b415dd0816cb1c7fdfd6d6dc71f"
+  },
+  {
+    "id": "b63897e4-0c50-4238-8ccf-fd1820910781",
+    "name": "Align Usage Page with annual contract terms for clarity",
+    "aor": "Application",
+    "arr": 0,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/2b6f2b415dd081b38b69fdbd2c94de0d"
+  },
+  {
+    "id": "1c03dd7f-11b5-4b6e-ae71-ec1d3c8366a3",
+    "name": "Allow disabling Unplanned-Event violation alerts in tracking plans",
+    "aor": "Application",
+    "arr": 0,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/2b6f2b415dd081c983fad8c0631a2193"
+  },
+  {
+    "id": "9a6579cb-d01b-4edb-8335-cef070c17228",
+    "name": "Add note in UI for rETL sync scheduling with start time",
+    "aor": "Application",
+    "arr": 0,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/2b6f2b415dd08129a6a7d9a0ddefb709"
+  },
+  {
+    "id": "1fc0de8e-27db-401a-8c6d-7087bb802669",
+    "name": "Feature request to maintain data types in mapping for analysis",
+    "aor": "Application",
+    "arr": 0,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/2b6f2b415dd08146894ccf3ac4ba1a31"
+  },
+  {
+    "id": "b8966539-adaa-4b85-a00d-aceaa99f2eb9",
+    "name": "Implement GCP as identity provider for SesameAI",
+    "aor": "Application",
+    "arr": 0,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/2b6f2b415dd0811fb3f4c5663d0e4ef1"
+  },
+  {
+    "id": "118888b2-2ba9-47de-b457-434255438fa1",
+    "name": "Align warehouse data types with tracking plan properties",
+    "aor": "Application",
+    "arr": 558754,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/2b6f2b415dd0814fa8e2ced63116f6eb"
+  },
+  {
+    "id": "232a5d91-d70a-47a1-b525-f9e474e739e0",
+    "name": "Add confirmation for event instrumentation in tracking plan",
+    "aor": "Application",
+    "arr": 0,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/2b6f2b415dd0816fa7c0cb5635b3d6fd"
+  },
+  {
+    "id": "4be15a5b-1e1e-436e-939f-a0789ff3d336",
+    "name": "Auto-track Application Lifecycle events in tracking plan",
+    "aor": "Application",
+    "arr": 27000,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/2b6f2b415dd081708124d8bd78717106"
+  },
+  {
+    "id": "4d4b188e-e7fc-4b46-a6ce-b21949d915c8",
+    "name": "Validate presence of userID in identify and tracking calls",
+    "aor": "Application",
+    "arr": 0,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/2b6f2b415dd08175be19ecf0d16ea455"
+  },
+  {
+    "id": "9c129ea6-c57d-444a-aef6-0719fda14e0b",
+    "name": "Add feature to block events with similar names",
+    "aor": "Application",
+    "arr": 109600,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/2b6f2b415dd081ca8db8eaf12a5d590f"
+  },
+  {
+    "id": "a54429db-c208-46fc-b79f-1ab680388a31",
+    "name": "Common/global properties and property groups in tracking plans",
+    "aor": "Application",
+    "arr": 245000,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/2b6f2b415dd081d78c56eb0f3d802341"
+  },
+  {
+    "id": "a0a188da-3d28-4782-9dbd-b2a35c07f283",
+    "name": "Custom versioning for tracking plans (semantic versioning)",
+    "aor": "Application",
+    "arr": 558754,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/2b6f2b415dd081e09210d0d19db59b6d"
+  },
+  {
+    "id": "5891db2f-23c5-4a43-80ad-262e834eb674",
+    "name": "Assist with Cars Jumpcloud SSO/SCIM URL and token generation",
+    "aor": "Application",
+    "arr": 328435,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/2b6f2b415dd0811a98fcd3b5bb654fe2"
+  },
+  {
+    "id": "eefab3bb-9fab-44c6-9257-eb499f7be3b7",
+    "name": "Fix RS Open Source object storage toggle UX confusion",
+    "aor": "Application",
+    "arr": 0,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/2b6f2b415dd08107abc4ee19a05ff531"
+  },
+  {
+    "id": "30445a7a-fabb-4e5b-832d-02c07efeb080",
+    "name": "Warehouse Schema Config in webapp",
+    "aor": "Application",
+    "arr": 0,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/2b5f2b415dd081d0a3c2edafeac960c4"
+  },
+  {
+    "id": "ed77ffac-c38d-4242-911a-c769fef75d2e",
+    "name": "Conditional Validations in UI",
+    "aor": "Application",
+    "arr": 0,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/2b0f2b415dd081e494a9d2055995f129"
+  },
+  {
+    "id": "3b861791-16a6-431c-9ebb-9c09fe803b93",
+    "name": "Create setting up SSO using web app",
+    "aor": "Application",
+    "arr": 0,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/2aff2b415dd081e589b9cff4134a3dd1"
+  },
+  {
+    "id": "5d99d595-5965-420e-9bd6-1b30986ca4eb",
+    "name": "Allow customers to failed events reports for warehouse destinations in events Tab.",
+    "aor": "Application",
+    "arr": 0,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/2aaf2b415dd081c78eb6efa2e8f10444"
+  },
+  {
+    "id": "565f5e65-5e36-409a-b16e-a77a797240ba",
+    "name": "Allow customers to rotate write keys for existing sources",
+    "aor": "Application",
+    "arr": 0,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/2a9f2b415dd081d9b3a3f8e44e456866"
+  },
+  {
+    "id": "7e998fb9-6d9c-4707-b49e-e2f7fba6789c",
+    "name": "Add alerts section for tracking plan in tracking plan page, we already have this at workspace alert section",
+    "aor": "Application",
+    "arr": 25000,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/2a9f2b415dd081029dd4c336b3e29ce7"
+  },
+  {
+    "id": "532e97e3-c1f4-43b4-b2da-f02694f133f0",
+    "name": "Change the sidebar to reflect the actual product terminology and docs. Our docs and our webapp feel like they are from different products.",
+    "aor": "Application",
+    "arr": 0,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/2a4f2b415dd08152a100e335f4c97211"
+  },
+  {
+    "id": "24020845-605d-408d-abc8-4f02084b9c46",
+    "name": "The source-level filtering you're looking for isn't currently applied in the underlying query itself",
+    "aor": "Application",
+    "arr": 80000,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/2a4f2b415dd081d0aa8dc506dc55b2a9"
+  },
+  {
+    "id": "dc4c2eac-14cd-46c2-8c35-665c8d50bbb8",
+    "name": "Auto generate event specs (standard events / ecommerce events ) with the click of a button.",
+    "aor": "Application",
+    "arr": 0,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/2a3f2b415dd081bfacb5c1c7204ae1ce"
+  },
+  {
+    "id": "7c59a68c-67e0-4160-bd82-0be5054b1860",
+    "name": "@Jeremy Dang suggested a feature request to improve failure reporting in Airflow for the RudderstackProfilesOperator",
+    "aor": "Profiles",
+    "arr": 0,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/2a2f2b415dd081e6a89bfe6d3ef790da"
+  },
+  {
+    "id": "799524c5-2a36-4b38-aa0e-8ac84a25e4ee",
+    "name": "In the context of AI feature tracking guide (https://rudderlabs.slack.com/files/UTENGAJAF/F09H5RC0X70/in-product_ai_features_-_track_and_analytics_guide.pdf?origin_team=THZM86VSS&origin_channel=DTJ3C0P6V). Does it make sense to expose it as one of the tracking plan templates? We currently only have an ecommerce template",
+    "aor": "Application",
+    "arr": 0,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/2a1f2b415dd08188a901fe86fc760501"
+  },
+  {
+    "id": "3b9d02e7-31b9-4e43-92c8-a52fa09de1aa",
+    "name": "Detailed Logs of RudderStack Pipelinee",
+    "aor": "Application",
+    "arr": 0,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/2a0f2b415dd081d2ae1de4d3eb031d06"
+  },
+  {
+    "id": "9a9e20f7-4192-49e0-87f8-f8826bb7bbea",
+    "name": "Warehouse Schema Definitions and Control",
+    "aor": "Application",
+    "arr": 558754,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/29af2b415dd081db862de11357176194"
+  },
+  {
+    "id": "9f420135-238d-4505-a307-e62972ac0c1c",
+    "name": "Warehouse Cost Attribution / Observability",
+    "aor": "Application",
+    "arr": 487310,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/29af2b415dd081de94edcb8c4871e45d"
+  },
+  {
+    "id": "086b5faa-60b5-43e9-ac42-d87feb9783e3",
+    "name": "Review all email templates we are sending to users. We can standardize templates and level them up.",
+    "aor": "Application",
+    "arr": 0,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/299f2b415dd0810e92a2c12711cad1d1"
+  },
+  {
+    "id": "3ca5d764-85c7-431c-920b-34193f1ec039",
+    "name": "Improved live-events capability to look for events based on customer provided criteria for better debuggability",
+    "aor": "Application",
+    "arr": 415000,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/299f2b415dd0818b961cef0613000b19"
+  },
+  {
+    "id": "fb69d1cc-135d-49d3-9b96-1ba5579d8a6f",
+    "name": "Application lifecycle events show up as unplanned event violations in tracking plan and block them needs extra steps to be taken by customer without the presence of event codex",
+    "aor": "Application",
+    "arr": 85000,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/299f2b415dd08154a060c7051699a503"
+  },
+  {
+    "id": "07acdf42-8e59-4331-a3e7-4f6ab5622a3c",
+    "name": "Present invited members in members list so that its possible for org admins to configure permissions for invited member independently of whether the member accepted the invite",
+    "aor": "Application",
+    "arr": 550000,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/299f2b415dd081f493e3c4eb5fd423ca"
+  },
+  {
+    "id": "a41b7a2e-fb90-4673-b5f6-d47fc1bd072e",
+    "name": "Dedicated Authentication Failure Alerts for (OAuth) Destinations",
+    "aor": "Application",
+    "arr": 0,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/296f2b415dd08125abd1c805d1198833"
+  },
+  {
+    "id": "9c476963-6867-4baa-910b-bcf3122e94b8",
+    "name": "Stricter schema validations for Custom Types",
+    "aor": "Application",
+    "arr": 0,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/295f2b415dd081799d1cc55f5e091e71"
+  },
+  {
+    "id": "56d44d08-aa99-440a-9870-6dca33b420bb",
+    "name": "Naming convention rules on data catalog entity (events, properties) names",
+    "aor": "Application",
+    "arr": 0,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/294f2b415dd0819f8e67c9d485d224a4"
+  },
+  {
+    "id": "41032fa4-e944-4c2b-b018-fba398ef5cb4",
+    "name": "Self serve Replay functionality on UI",
+    "aor": "Application",
+    "arr": 0,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/28ff2b415dd0818ea790f12dcec1364d"
+  },
+  {
+    "id": "d07be888-5664-4ca8-89d1-af6cde6425c3",
+    "name": "Webhook Source Event Mapping",
+    "aor": "Application",
+    "arr": 0,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/28df2b415dd0811aa4c6fbee5881647a"
+  },
+  {
+    "id": "21eb06ca-72e9-4c8d-a54a-24b5a20c73c2",
+    "name": "Advanced Bot Detection",
+    "aor": "Application",
+    "arr": 0,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/28df2b415dd081c1b823f604f3cdd184"
+  },
+  {
+    "id": "4e37b9c7-3329-4e68-982f-959c05bf7481",
+    "name": "Violation actionability(dropping/flagging) based on granular criteria. Currently its only at an event type level and violation type level.",
+    "aor": "Application",
+    "arr": 0,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/28cf2b415dd0816191c3ec76796e0850"
+  },
+  {
+    "id": "44b5c184-ce76-4c03-b127-6bb2d84fabe6",
+    "name": "Bot Management: Custom Bot List Upload/Configuration",
+    "aor": "Application",
+    "arr": 591244,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/28cf2b415dd08167a57dcb6420eab8e7"
+  },
+  {
+    "id": "3017e191-cd13-48af-a4aa-fd0dd0c3ff3b",
+    "name": "MFA Improvements for RudderStack users.",
+    "aor": "Application",
+    "arr": 86360,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/286f2b415dd081599515c303cc0d9f1b"
+  },
+  {
+    "id": "db451641-a6c4-4fd5-88dd-f9b8558195be",
+    "name": "E2E view of the event stream pipeline",
+    "aor": "Application",
+    "arr": 558754,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/278f2b415dd081a39949fa7d5a4b1768"
+  },
+  {
+    "id": "49d67822-00c3-4d96-95ed-776be4d0fea7",
+    "name": "Enhanced PII data detection/prevention",
+    "aor": "Application",
+    "arr": 0,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/278f2b415dd0810e9e6cd4c42d723769"
+  },
+  {
+    "id": "4d6c27ff-1969-47e1-b0ae-538be13b74d1",
+    "name": "(Exfinity) Browsing multiple workspaces",
+    "aor": "Application",
+    "arr": 93450,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper",
+    "notionUrl": "https://www.notion.so/278f2b415dd0819e8eccc72a3e5aa57f"
+  }
+]

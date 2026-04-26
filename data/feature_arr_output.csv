@@ -1,0 +1,103 @@
+feature,parent_feature,hopper_stage,priority,area_pm,customer_count,customers,total_arr
+RudderStack Event Quarantine Feature Request,Build a Quarantine Zone for Violated Events,ToAreaPM,High,Drew Dodds,3,"accuRX,bol.com,lovable.dev",1038289.0
+Drop events with fields containing sql ingestion strings/prototype pollution fields,Trackingplan violation management,ToAreaPM,High,Drew Dodds,2,"bol.com,lovable.dev",932789.0
+Pipeline Inspector - Unified Event Tracing View,,ToAreaPM,Medium,Drew Dodds,6,"Bitpanda,Native Path,Salesloft,Love Holidays,Exinity,Kajabi",802354.0
+Bot Management: Custom Bot List Upload/Configuration,Bot Management - Custom Bot list,ToAreaPM,Medium,Drew Dodds,2,"bol.com,Allbirds",591244.0
+Disable free tier workspace creation for Google Sign-In users,,ToAreaPM,,Drew Dodds,2,"Sesame AI,Procter & Gamble",581800.0
+Warehouse Schema Definitions and Control,Warehouse Schema Management,To Feature DB,,Drew Dodds,1,bol.com,558754.0
+Schema enforcement toggle to prevent column creation on data type mismatch in warehouse destinations,Warehouse Schema Management,ToAreaPM,,Drew Dodds,1,bol.com,558754.0
+Events Graph – Additional Time Range Options,,ToAreaPM,,Drew Dodds,1,bol.com,558754.0
+Event Filtering by Property Values,,ToAreaPM,,Drew Dodds,1,bol.com,558754.0
+E2E view of the event stream pipeline,,PSG Discovery,,Drew Dodds,1,bol.com,558754.0
+Destination-aware tracking plans,Trackingplan violation management,ToAreaPM,High,Drew Dodds,1,bol.com,558754.0
+Custom versioning for tracking plans (semantic versioning),Tracking plan Version Pinning,ToAreaPM,High,Drew Dodds,1,bol.com,558754.0
+Align warehouse data types with tracking plan properties,Trackingplan violation management,ToAreaPM,,Drew Dodds,1,bol.com,558754.0
+need to provide a way to view and update existing credentials for data retention.,,ToAreaPM,,Drew Dodds,1,Procter & Gamble,550000.0
+Present invited members in members list so that its possible for org admins to configure permissions for invited member independently of whether the member accepted the invite,,ToAreaPM,,Drew Dodds,1,Procter & Gamble,550000.0
+Ability to update data retention account in place instead of disconnecting first,,ToAreaPM,,Drew Dodds,1,Procter & Gamble,550000.0
+Warehouse Cost Attribution / Observability,,ToAreaPM,,Drew Dodds,4,"Mattermost,Wyze,Tabnine,Playtomic",487310.0
+Improved live-events capability to look for events based on customer provided criteria for better debuggability,,ToAreaPM,,Drew Dodds,1,VSCO,415000.0
+[Lovable] oneOf functionality in tracking plans,,ToAreaPM,,Drew Dodds,1,lovable.dev,374035.0
+Warehouse column type inference should respect tracking plan schema definitions,Warehouse Schema Management,ToAreaPM,High,Drew Dodds,1,lovable.dev,374035.0
+Tracking plan Violation Management,Trackingplan violation management,ToAreaPM,High,Drew Dodds,1,lovable.dev,374035.0
+JSON Schema for editor autocomplete for our YAMLs,,ToAreaPM,Medium,Drew Dodds,1,lovable.dev,374035.0
+Add filter on the Live Event viewer,,ToAreaPM,High,Drew Dodds,1,Bolt,358400.0
+Assist with Cars Jumpcloud SSO/SCIM URL and token generation,,ToAreaPM,,Drew Dodds,1,Cars.com,328435.0
+Improve Product Usage Dashboard,,ToAreaPM,,Drew Dodds,2,"Kape Technologies,Milwaukee Tool",277000.0
+feature request: block IP address transmission to destinations via dashboard,Trackingplan violation management,ToAreaPM,Medium,Drew Dodds,1,Bitpanda,249000.0
+Sample Event Preview in Sources,,ToAreaPM,Medium,Drew Dodds,1,Bitpanda,249000.0
+Common/global properties and property groups in tracking plans,"Tracking plan - Global rules expanded for payload outside properties like context, Tracking plan composability: Reusable maintainable dictionary of Tracking plan event schemas",ToAreaPM,,Drew Dodds,1,Glassdoor,245000.0
+Warehouse Data Monitoring and Alerts,,PSG Discovery,,Drew Dodds,2,"Athletic Greens,Grafana",199600.0
+"rETL alerts should evaluate failures on a per-job basis, not per-hour",,ToAreaPM,,Drew Dodds,1,Zoopla,195270.0
+High volume Alert - similar to low volume alerts that we provide today.,High volume Alert - similar to low volume alerts that we provide today.,To Feature DB,Medium,Drew Dodds,2,"Caratlane,Tibber",140687.0
+Observability for suppressed users,,ToAreaPM,,Drew Dodds,1,Kajabi,126500.0
+Consent Management status overview exposed in UI,,ToAreaPM,,Drew Dodds,1,Kajabi,126500.0
+Bot management to detect LLM bots,,ToAreaPM,,Drew Dodds,1,Grafana,109600.0
+Add feature to block events with similar names,,ToAreaPM,,Drew Dodds,1,Grafana,109600.0
+Enhanced SCIM User Provisioning Feature Request,,ToAreaPM,,Drew Dodds,1,Exinity,93450.0
+(Exfinity) Browsing multiple workspaces,CLI Multi-Profile / Workspace Switching,ToAreaPM,,Drew Dodds,1,Exinity,93450.0
+One-Click Add Events to Tracking Plan from Violations / Catalog,Import from source into existing tracking plans,ToAreaPM,Medium,Drew Dodds,1,AXS,92500.0
+Allow smaller time windows for tracking plan violation filtering (below 2 hours),,ToAreaPM,,Drew Dodds,1,Essent,91000.0
+MFA Improvements for RudderStack users.,TOTP Based MFA Support,To Feature DB,,Drew Dodds,2,"TicketSwap,Knack",86360.0
+Application lifecycle events show up as unplanned event violations in tracking plan and block them needs extra steps to be taken by customer without the presence of event codex,,ToAreaPM,,Drew Dodds,1,FatSecret,85000.0
+The source-level filtering you're looking for isn't currently applied in the underlying query itself,,ToAreaPM,,Drew Dodds,1,TicketSwap,80000.0
+Prevent new org account creation for non-member SSO logins,,To Feature DB,,Drew Dodds,1,TicketSwap,80000.0
+Global Privacy Control integration for consent management,,ToAreaPM,,Drew Dodds,1,ZenBusiness,44000.0
+Add Rippling as an IdP for SCIM,,ToAreaPM,,Drew Dodds,1,SchoolAI,39520.0
+Allow signup with google during accept invitation in RudderStack webapp,,ToAreaPM,,Drew Dodds,1,Tixel,30000.0
+Show sample events of successful events too.,,ToAreaPM,,Drew Dodds,1,RevenueCat,27000.0
+Auto-track Application Lifecycle events in tracking plan,,ToAreaPM,,Drew Dodds,1,Lonely Planet,27000.0
+"Add alerts section for tracking plan in tracking plan page, we already have this at workspace alert section",Trackingplan alert management,ToAreaPM,Low,Drew Dodds,1,Brave Thinking Institute,25000.0
+Add alerts feature to the Tracking plan,Trackingplan alert management,ToAreaPM,Low,Drew Dodds,1,Brave Thinking Institute,25000.0
+Webhook Source Event Mapping,,ToAreaPM,,Drew Dodds,0,,0
+Warehouse Schema Config in webapp,,ToAreaPM,,Drew Dodds,0,,0
+Violation actionability(dropping/flagging) based on granular criteria. Currently its only at an event type level and violation type level.,Trackingplan violation management,ToAreaPM,,Drew Dodds,0,,0
+Validate presence of userID in identify and tracking calls,Tracking plan - Global rules expanded for payload outside properties like context,ToAreaPM,,Drew Dodds,0,,0
+Support username configuration for Redis,,ToAreaPM,,Drew Dodds,0,,0
+Support IDP initiated SSO auth for Okta & Azure SAML SSO login. IDP initiated auth is less secure but customers asked it in the past.,,ToAreaPM,Low,Drew Dodds,0,,0
+Stricter schema validations for Custom Types,,ToAreaPM,,Drew Dodds,0,,0
+Skip Traits in Event Table,Warehouse Schema Management,ToAreaPM,,Drew Dodds,0,,0
+Self-Serve account deletion.,Self serve Account/User Deletion,To Feature DB,Medium,Drew Dodds,0,,0
+Self serve Replay functionality on UI,,ToAreaPM,,Drew Dodds,0,,0
+Self Serve Workspace Creation,,ToAreaPM,,Drew Dodds,0,,0
+SSO Self-Serve,SSO Self-serve,ToAreaPM,Medium,Drew Dodds,0,,0
+Review all email templates we are sending to users. We can standardize templates and level them up.,,ToAreaPM,,Drew Dodds,0,,0
+Proposal: Add a button on the UI to trigger a full run of the ID Stitcher.,,ToAreaPM,,Drew Dodds,0,,0
+"Naming convention rules on data catalog entity (events, properties) names",,ToAreaPM,,Drew Dodds,0,,0
+Include failure stage on Health dashboard flyout. Currently users can't differentiate UT/Router failures.,,ToAreaPM,,Drew Dodds,0,,0
+In the context of AI feature tracking guide (https://rudderlabs.slack.com/files/UTENGAJAF/F09H5RC0X70/in-product_ai_features_-_track_and_analytics_guide.pdf?origin_team=THZM86VSS&origin_channel=DTJ3C0P6V). Does it make sense to expose it as one of the tracking plan templates? We currently only have an ecommerce template,,ToAreaPM,Medium,Drew Dodds,0,,0
+Implement GCP as identity provider for SesameAI,,ToAreaPM,,Drew Dodds,0,,0
+IAM role support for warehouses,,ToAreaPM,,Drew Dodds,0,,0
+Flexible Alert Comparison Windows (Week-over-Week Volume Alerts),,ToAreaPM,Low,Drew Dodds,0,,0
+Fix RS Open Source object storage toggle UX confusion,,ToAreaPM,,Drew Dodds,0,,0
+Feature request to maintain data types in mapping for analysis,,ToAreaPM,,Drew Dodds,0,,0
+Explore alternatives for independent event modifications in tracking plans,"Tracking plan Version Pinning, Tracking plan composability: Reusable maintainable dictionary of Tracking plan event schemas",ToAreaPM,High,Drew Dodds,0,,0
+Expand Data Catalog to include data structures beyond just events so that it becomes the contextual data dictionary underpinning agentic solutions bridging the divide between Data teams and business users,Tracking plan composability: Reusable maintainable dictionary of Tracking plan event schemas,ToAreaPM,Medium,Drew Dodds,0,,0
+Event-rule variants in Tracking Plan UI and rules on fields outside properties,Tracking plan - Global rules expanded for payload outside properties like context,ToAreaPM,High,Drew Dodds,0,,0
+Event Utilization Visibility,,ToAreaPM,,Drew Dodds,0,,0
+Enhanced PII data detection/prevention,,ToAreaPM,,Drew Dodds,0,,0
+Enhance UI flow for WH account and async API validation,,ToAreaPM,,Drew Dodds,0,,0
+Do not create new org/workspace when user signs up.,Do not create new org/workspace when user signs up.,To Feature DB,High,Drew Dodds,0,,0
+Detailed Logs of RudderStack Pipelinee,,ToAreaPM,,Drew Dodds,1,Redbubble,0
+Dedicated Authentication Failure Alerts for (OAuth) Destinations,,ToAreaPM,,Drew Dodds,0,,0
+"Customer success team downgrades churned customers to our free tier. In some cases, we need to completely disable the service to a customer (past due, agency owned the agreement, etc.)",,ToAreaPM,,Drew Dodds,0,,0
+Create setting up SSO using web app,,ToAreaPM,,Drew Dodds,0,,0
+Conditional Validations in UI,,ToAreaPM,Low,Drew Dodds,0,,0
+Check for compliance proof with WCAG 2.2 AA and WAD,,ToAreaPM,,Drew Dodds,0,,0
+Change the sidebar to reflect the actual product terminology and docs. Our docs and our webapp feel like they are from different products.,,ToAreaPM,,Drew Dodds,0,,0
+Centralize Consent Management in Control Plan,,ToAreaPM,,Drew Dodds,0,,0
+Bring visibility of pending/backlog event count per destination. Give ability to configure alerts based on backlog.,,ToAreaPM,Low,Drew Dodds,0,,0
+Better linking for Monitoring and Alerts Emails,,ToAreaPM,,Drew Dodds,0,,0
+Auto generate event specs (standard events / ecommerce events ) with the click of a button.,,ToAreaPM,,Drew Dodds,0,,0
+Allow disabling Unplanned-Event violation alerts in tracking plans,,ToAreaPM,,Drew Dodds,0,,0
+Allow customers to rotate write keys for existing sources,,ToAreaPM,,Drew Dodds,0,,0
+Allow customers to failed events reports for warehouse destinations in events Tab.,,ToAreaPM,,Drew Dodds,0,,0
+Align Usage Page with annual contract terms for clarity,,ToAreaPM,,Drew Dodds,0,,0
+Advanced Bot Detection,,ToAreaPM,,Drew Dodds,0,,0
+Add user transformation latency metric to web app,,ToAreaPM,,Drew Dodds,0,,0
+Add note in UI for rETL sync scheduling with start time,,ToAreaPM,,Drew Dodds,0,,0
+Add confirmation for event instrumentation in tracking plan,,ToAreaPM,,Drew Dodds,0,,0
+Ability to view and update data retention account in webapp,,ToAreaPM,,Drew Dodds,0,,0
+@Jeremy Dang suggested a feature request to improve failure reporting in Airflow for the RudderstackProfilesOperator,,ToAreaPM,,Drew Dodds,0,,0
+"1. Events Tab in Control Plane should allow filtering by either Event Name or Event Type
+2. Event volume graph should change to reflect filtered event list",,ToAreaPM,,Drew Dodds,0,,0
