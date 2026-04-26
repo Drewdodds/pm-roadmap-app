@@ -171,6 +171,13 @@ export const FeatureTable = ({
               >
                 AoR
               </th>
+              <th
+                className="sticky z-[2] bg-primary-100 px-3 py-3 text-left"
+                style={stickyTop}
+                title="Flag features that need more research before scoring. Does not contribute to score."
+              >
+                Follow-up
+              </th>
               {SCORING_KEYS.map((k) => (
                 <th
                   key={k}
@@ -249,6 +256,30 @@ export const FeatureTable = ({
                     value={f.aor}
                     onChange={(aor) => onChange(f.id, { aor })}
                   />
+                </td>
+                <td className="px-3 py-2">
+                  <div className="flex items-center gap-2">
+                    <input
+                      type="checkbox"
+                      checked={f.needsFollowUp}
+                      onChange={(e) =>
+                        onChange(f.id, { needsFollowUp: e.target.checked })
+                      }
+                      className="h-4 w-4 cursor-pointer rounded border-primary-300 text-amber-500 focus:ring-amber-500"
+                      title="Needs follow-up"
+                    />
+                    <input
+                      type="text"
+                      placeholder="why?"
+                      value={f.followUpNote ?? ''}
+                      onChange={(e) =>
+                        onChange(f.id, {
+                          followUpNote: e.target.value || undefined,
+                        })
+                      }
+                      className="w-36 rounded border border-transparent bg-transparent px-1 py-0.5 text-xs hover:border-primary-200 focus:border-primary-500 focus:outline-none"
+                    />
+                  </div>
                 </td>
                 {SCORING_KEYS.map((k) => (
                   <td key={k} className="px-3 py-2 text-center">

@@ -15,6 +15,7 @@ export const sampleFeatures = (): Feature[] => [
       customer_ask: true,
     },
     source: 'feature',
+    needsFollowUp: false,
   },
   {
     id: crypto.randomUUID(),
@@ -28,6 +29,7 @@ export const sampleFeatures = (): Feature[] => [
       minimize_churn: true,
     },
     source: 'hopper',
+    needsFollowUp: false,
   },
   {
     id: crypto.randomUUID(),
@@ -40,6 +42,7 @@ export const sampleFeatures = (): Feature[] => [
       operationally_critical: true,
     },
     source: 'hopper',
+    needsFollowUp: false,
   },
   {
     id: crypto.randomUUID(),
@@ -53,6 +56,7 @@ export const sampleFeatures = (): Feature[] => [
       customer_ask: true,
     },
     source: 'feature',
+    needsFollowUp: false,
   },
   {
     id: crypto.randomUUID(),
@@ -65,5 +69,6 @@ export const sampleFeatures = (): Feature[] => [
       increase_arr: true,
     },
     source: 'hopper',
+    needsFollowUp: false,
   },
 ];

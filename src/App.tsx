@@ -17,6 +17,7 @@ import {
 import { sampleFeatures } from './sampleData';
 
 type SourceFilter = 'All' | 'hopper' | 'feature' | 'manual';
+type FollowUpFilter = 'All' | 'NeedsFollowUp' | 'Ready';
 
 export default function App() {
   const [features, setFeatures] = useState<Feature[]>(() => loadFeatures());
@@ -26,6 +27,7 @@ export default function App() {
   const [osts, setOsts] = useState<ContextItem[]>(() => loadContextItems('osts'));
   const [aorFilter, setAorFilter] = useState<AoR | 'All'>('All');
   const [sourceFilter, setSourceFilter] = useState<SourceFilter>('All');
+  const [followUpFilter, setFollowUpFilter] = useState<FollowUpFilter>('All');
   const [search, setSearch] = useState('');
   const [showAdd, setShowAdd] = useState(false);
   const [showAddStrategy, setShowAddStrategy] = useState(false);
@@ -48,10 +50,12 @@ export default function App() {
     return features.filter((f) => {
       if (aorFilter !== 'All' && f.aor !== aorFilter) return false;
       if (sourceFilter !== 'All' && f.source !== sourceFilter) return false;
+      if (followUpFilter === 'NeedsFollowUp' && !f.needsFollowUp) return false;
+      if (followUpFilter === 'Ready' && f.needsFollowUp) return false;
       if (q && !f.name.toLowerCase().includes(q)) return false;
       return true;
     });
-  }, [features, aorFilter, sourceFilter, search]);
+  }, [features, aorFilter, sourceFilter, followUpFilter, search]);
 
   const totalArr = useMemo(
     () => filtered.reduce((sum, f) => sum + f.arr, 0),
@@ -117,6 +121,8 @@ export default function App() {
         onAorFilterChange={setAorFilter}
         sourceFilter={sourceFilter}
         onSourceFilterChange={setSourceFilter}
+        followUpFilter={followUpFilter}
+        onFollowUpFilterChange={setFollowUpFilter}
         search={search}
         onSearchChange={setSearch}
         count={filtered.length}

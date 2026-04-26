@@ -33,6 +33,8 @@ export interface Feature {
   scores: Scores;
   source: Source;
   notionUrl?: string;
+  needsFollowUp: boolean;
+  followUpNote?: string;
 }
 
 export const emptyScores = (): Scores =>

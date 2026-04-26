@@ -22,6 +22,7 @@ export const AddFeatureModal = ({ onClose, onAdd }: Props) => {
       arr,
       scores: emptyScores(),
       source: 'manual',
+      needsFollowUp: false,
     });
     onClose();
   };
