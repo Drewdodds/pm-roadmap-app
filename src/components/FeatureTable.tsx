@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import type { AoR, Feature, ScoringKey } from '../types';
 import { SCORING_KEYS, SCORING_LABELS, computeScore } from '../types';
 
-type SortKey = 'score' | 'arr';
+type SortKey = 'index' | 'score' | 'arr';
 type SortDir = 'asc' | 'desc';
 
 interface Props {
@@ -31,8 +31,8 @@ export const FeatureTable = ({
   onDelete,
 }: Props) => {
   const [nameColWidth, setNameColWidth] = useState<number>(loadNameWidth);
-  const [sortKey, setSortKey] = useState<SortKey>('score');
-  const [sortDir, setSortDir] = useState<SortDir>('desc');
+  const [sortKey, setSortKey] = useState<SortKey>('index');
+  const [sortDir, setSortDir] = useState<SortDir>('asc');
 
   useEffect(() => {
     localStorage.setItem(NAME_WIDTH_KEY, String(nameColWidth));
@@ -72,12 +72,16 @@ export const FeatureTable = ({
   };
 
   const sorted = useMemo(() => {
-    const withScore = features.map((f) => ({
+    const withScore = features.map((f, i) => ({
       f,
       score: computeScore(f.scores),
+      originalIndex: i,
     }));
     const mul = sortDir === 'desc' ? -1 : 1;
     withScore.sort((a, b) => {
+      if (sortKey === 'index') {
+        return mul * (a.originalIndex - b.originalIndex);
+      }
       if (sortKey === 'score') {
         const d = a.score - b.score;
         if (d !== 0) return mul * d;
@@ -113,10 +117,15 @@ export const FeatureTable = ({
   return (
     <div className="overflow-x-auto rounded-lg border border-primary-200 bg-white shadow-sm">
       <table className="min-w-full text-sm">
-          <thead className="bg-primary-100 text-xs uppercase tracking-wide text-primary-300">
+          <thead className="bg-primary-100 text-xs uppercase tracking-wide text-primary-900">
             <tr>
               <th className="sticky left-0 z-[1] bg-primary-100 px-4 py-3 text-left">
-                #
+                <SortHeader
+                  label="#"
+                  active={sortKey === 'index'}
+                  dir={sortDir}
+                  onClick={() => onSortClick('index')}
+                />
               </th>
               <th
                 className="relative px-4 py-3 text-left"
@@ -259,12 +268,12 @@ const SortHeader = ({
   <button
     onClick={onClick}
     className={`inline-flex items-center gap-1 uppercase tracking-wide text-xs font-medium transition-colors ${
-      active ? 'text-primary-900' : 'text-primary-300 hover:text-primary-900'
+      active ? 'text-primary-900' : 'text-primary-900 hover:text-primary-900'
     }`}
     title={active ? `Sorted ${dir === 'desc' ? 'descending' : 'ascending'} — click to toggle` : `Sort by ${label}`}
   >
     {label}
-    <span className={`text-[10px] ${active ? 'opacity-100' : 'opacity-30'}`}>
+    <span className="text-[10px]">
       {active ? (dir === 'desc' ? '▼' : '▲') : '▼'}
     </span>
   </button>

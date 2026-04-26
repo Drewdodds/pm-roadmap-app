@@ -625,7 +625,7 @@
   },
   {
     "id": "bcaae68f-c11e-4aff-9a2b-3655a5b136d3",
-    "name": "Events Graph – Additional Time Range Options",
+    "name": "Events Graph \u2013 Additional Time Range Options",
     "aor": "Application",
     "arr": 558754,
     "scores": {
@@ -1950,5 +1950,350 @@
     },
     "source": "hopper",
     "notionUrl": "https://www.notion.so/278f2b415dd0819e8eccc72a3e5aa57f"
+  },
+  {
+    "id": "5e6b177c-9869-45b4-bcb3-d9398d66919e",
+    "name": "rETL Job-level Alert Thresholds",
+    "aor": "Profiles",
+    "arr": 195270,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper"
+  },
+  {
+    "id": "ebd3fce0-ee4c-4c4a-a152-45b69e418947",
+    "name": "ID Stitcher Improvements - Instead of creating a new table each run, create a single table that is updated incrementally. That table can then be appropriately partitioned or clustered for more efficient scanning.",
+    "aor": "Profiles",
+    "arr": 90000,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper"
+  },
+  {
+    "id": "2bd84148-d217-441a-a6ca-2a92af5f0549",
+    "name": "SSH Tunnel Support for Redshift Sources (Reverse ETL)",
+    "aor": "Profiles",
+    "arr": 70000,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper"
+  },
+  {
+    "id": "805b93a1-02f1-41e3-8c3d-cf372fd7fe87",
+    "name": "Profiles ID stitcher should have a hard-id requirement",
+    "aor": "Profiles",
+    "arr": 0,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper"
+  },
+  {
+    "id": "94086adf-c66b-4340-a5c0-2f25a30d5a3b",
+    "name": "Profiles should have a tighter integration with dbt",
+    "aor": "Profiles",
+    "arr": 0,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper"
+  },
+  {
+    "id": "61c5d121-5507-42e7-a11e-f250e16ca94b",
+    "name": "Extend rules based id stitcher to other warehouses - currently it works only on snowflake",
+    "aor": "Profiles",
+    "arr": 0,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper"
+  },
+  {
+    "id": "5e12ce82-b9af-4e49-8236-98836e640abb",
+    "name": "Support for creating a WH connection from scratch directly in Profiles.",
+    "aor": "Profiles",
+    "arr": 0,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper"
+  },
+  {
+    "id": "c37944e0-76d6-4516-b974-676c9944f03c",
+    "name": "Github app support for Profiles in the webapp",
+    "aor": "Profiles",
+    "arr": 0,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper"
+  },
+  {
+    "id": "247c9054-ff6d-4eec-8f5e-908153aee247",
+    "name": "Add telemetry for local pb runs",
+    "aor": "Profiles",
+    "arr": 0,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper"
+  },
+  {
+    "id": "c0ff97de-6c9e-47b2-9eb8-42a70e032fb6",
+    "name": "pb tests - There is no way customers can see if their Profiles project changes are working as expected",
+    "aor": "Profiles",
+    "arr": 0,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper"
+  },
+  {
+    "id": "1c9fe39d-5f27-46ab-80eb-a4b62be1e697",
+    "name": "Enable customers to test Profiles projects safely by introducing targets.yaml for environment management. Customers can use CSV files for rapid local development and testing, then seamlessly switch to staging and production warehouses with pb run --target <name>. This unlocks powerful CSV-based workflows for project development and serves as the essential foundation for the upcoming pb test command. See comments for example.",
+    "aor": "Profiles",
+    "arr": 0,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper"
+  },
+  {
+    "id": "314717bd-4109-4153-94de-62791122cc19",
+    "name": "Enable native entity relationships in Profiles to eliminate awkward SQL model workarounds for B2B use cases. Currently, defining relationships between entities (e.g., User works_at Company) requires manual SQL joins, making concepts like \"users from Healthcare companies with revenue > $5M\" unnecessarily complex. Introduce relationships as first-class constructs in input contracts that declare how entities relate. See comments for example.",
+    "aor": "Profiles",
+    "arr": 0,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper"
+  },
+  {
+    "id": "81989de5-eda8-4e76-8c22-5a8edaf616ec",
+    "name": "Introduce built-in incremental accelerators for common aggregations in entity vars to simplify incremental feature definitions. Currently, making features incremental requires manually defining composable components and merge clauses, which is error-prone and verbose. Provide standard aggregation types (MIN, MAX, SUM, COUNT, MIN_BY, MAX_BY, LAST_N, RECENT_N,  DAU, MAU etc.) that automatically handle incremental merge logic. See comments for examples.",
+    "aor": "Profiles",
+    "arr": 0,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper"
+  },
+  {
+    "id": "6b757f1b-b802-4440-b7dc-ff8b68354dfe",
+    "name": "Test sync for rETL",
+    "aor": "Profiles",
+    "arr": 0,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper"
+  },
+  {
+    "id": "3a02cf24-6c2b-46ff-be0b-122cb0bca5f7",
+    "name": "Azure SQL source for Reverse ETL",
+    "aor": "Profiles",
+    "arr": 0,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper"
+  },
+  {
+    "id": "38867188-2ab2-4a50-b54f-9a9039887dc3",
+    "name": "Feature request to export profile table to CSV",
+    "aor": "Profiles",
+    "arr": 0,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper"
+  },
+  {
+    "id": "ce7f5b51-7bd1-4cd7-9bc4-f098937abd0f",
+    "name": "Add 'Download All' and 'Download History' buttons in Profiles UI",
+    "aor": "Profiles",
+    "arr": 0,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper"
+  },
+  {
+    "id": "718b987f-5157-4d6c-8185-b16070092606",
+    "name": "Include cleanup script logs in webapp run logs",
+    "aor": "Profiles",
+    "arr": 0,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper"
+  },
+  {
+    "id": "be4b2b57-5162-440c-ae98-68fdc3540391",
+    "name": "Implement probabilistic secondary stitching criteria for Profile creation",
+    "aor": "Profiles",
+    "arr": 0,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper"
+  },
+  {
+    "id": "fb02f5d1-258c-4872-8ee7-a2ef61d28170",
+    "name": "Remove the _4 on material_registry",
+    "aor": "Profiles",
+    "arr": 0,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper"
+  },
+  {
+    "id": "1a609a6f-00d3-47f0-9b73-b0062856c4f4",
+    "name": "Profiles project creation doesn't let you create an output",
+    "aor": "Profiles",
+    "arr": 0,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper"
+  },
+  {
+    "id": "0b25d57e-8889-4cad-80d1-a67c85fd8915",
+    "name": "Customer should be able to have persistent dev mode for profiles",
+    "aor": "Profiles",
+    "arr": 0,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "feature"
+  },
+  {
+    "id": "9bcc8529-bc1f-4576-b1c3-8fcbaf7793a2",
+    "name": "Profiles Copilot should automatically migrate projects to incremental",
+    "aor": "Profiles",
+    "arr": 0,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "hopper"
   }
 ]
