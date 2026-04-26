@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useLayoutEffect, useMemo, useState } from 'react';
 import type { AoR, Feature, ScoringKey } from '../types';
 import { SCORING_KEYS, SCORING_LABELS, computeScore } from '../types';
 
@@ -33,10 +33,21 @@ export const FeatureTable = ({
   const [nameColWidth, setNameColWidth] = useState<number>(loadNameWidth);
   const [sortKey, setSortKey] = useState<SortKey>('index');
   const [sortDir, setSortDir] = useState<SortDir>('asc');
+  const [headerOffset, setHeaderOffset] = useState<number>(0);
 
   useEffect(() => {
     localStorage.setItem(NAME_WIDTH_KEY, String(nameColWidth));
   }, [nameColWidth]);
+
+  useLayoutEffect(() => {
+    const el = document.querySelector('header');
+    if (!el) return;
+    const update = () => setHeaderOffset(el.getBoundingClientRect().height);
+    update();
+    const ro = new ResizeObserver(update);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
 
   const onSortClick = (key: SortKey) => {
     if (sortKey === key) {
@@ -114,12 +125,25 @@ export const FeatureTable = ({
     maxWidth: nameColWidth,
   } as const;
 
+  const stickyTop = { top: 0 } as const;
+  const stickyNameStyle = { ...nameColStyle, top: 0 } as const;
+  const wrapperStyle =
+    headerOffset > 0
+      ? { maxHeight: `calc(100vh - ${headerOffset + 60}px)` }
+      : undefined;
+
   return (
-    <div className="overflow-x-auto rounded-lg border border-primary-200 bg-white shadow-sm">
+    <div
+      className="overflow-auto rounded-lg border border-primary-200 bg-white shadow-sm"
+      style={wrapperStyle}
+    >
       <table className="min-w-full text-sm">
-          <thead className="bg-primary-100 text-xs uppercase tracking-wide text-primary-900">
+          <thead className="text-xs uppercase tracking-wide text-primary-900">
             <tr>
-              <th className="sticky left-0 z-[1] bg-primary-100 px-4 py-3 text-left">
+              <th
+                className="sticky left-0 z-[3] bg-primary-100 px-4 py-3 text-left"
+                style={stickyTop}
+              >
                 <SortHeader
                   label="#"
                   active={sortKey === 'index'}
@@ -128,8 +152,8 @@ export const FeatureTable = ({
                 />
               </th>
               <th
-                className="relative px-4 py-3 text-left"
-                style={nameColStyle}
+                className="sticky z-[2] bg-primary-100 px-4 py-3 text-left"
+                style={stickyNameStyle}
               >
                 Feature
                 <span
@@ -141,13 +165,26 @@ export const FeatureTable = ({
                   className="absolute right-0 top-0 h-full w-1.5 cursor-col-resize touch-none select-none bg-transparent hover:bg-primary-300"
                 />
               </th>
-              <th className="px-4 py-3 text-left">AoR</th>
+              <th
+                className="sticky z-[2] bg-primary-100 px-4 py-3 text-left"
+                style={stickyTop}
+              >
+                AoR
+              </th>
               {SCORING_KEYS.map((k) => (
-                <th key={k} className="px-3 py-3 text-center" title={k}>
+                <th
+                  key={k}
+                  className="sticky z-[2] bg-primary-100 px-3 py-3 text-center"
+                  style={stickyTop}
+                  title={k}
+                >
                   {SCORING_LABELS[k]}
                 </th>
               ))}
-              <th className="px-3 py-3 text-right">
+              <th
+                className="sticky z-[2] bg-primary-100 px-3 py-3 text-right"
+                style={stickyTop}
+              >
                 <SortHeader
                   label="Score"
                   active={sortKey === 'score'}
@@ -155,7 +192,10 @@ export const FeatureTable = ({
                   onClick={() => onSortClick('score')}
                 />
               </th>
-              <th className="px-3 py-3 text-right">
+              <th
+                className="sticky z-[2] bg-primary-100 px-3 py-3 text-right"
+                style={stickyTop}
+              >
                 <SortHeader
                   label="ARR"
                   active={sortKey === 'arr'}
@@ -163,8 +203,16 @@ export const FeatureTable = ({
                   onClick={() => onSortClick('arr')}
                 />
               </th>
-              <th className="px-3 py-3 text-left">Source</th>
-              <th className="px-3 py-3"></th>
+              <th
+                className="sticky z-[2] bg-primary-100 px-3 py-3 text-left"
+                style={stickyTop}
+              >
+                Source
+              </th>
+              <th
+                className="sticky z-[2] bg-primary-100 px-3 py-3"
+                style={stickyTop}
+              ></th>
             </tr>
           </thead>
           <tbody>
