@@ -1,5 +1,6 @@
 export type AoR = 'Application' | 'Profiles';
 export type Source = 'hopper' | 'feature' | 'manual';
+export type PlanningStatus = 'committed' | 'icebox';
 
 export const SCORING_KEYS = [
   'is_apart_of_company_strategy',
@@ -35,6 +36,7 @@ export interface Feature {
   notionUrl?: string;
   needsFollowUp: boolean;
   followUpNote?: string;
+  planningStatus: PlanningStatus | null;
 }
 
 export const emptyScores = (): Scores =>

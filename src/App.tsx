@@ -18,6 +18,7 @@ import { sampleFeatures } from './sampleData';
 
 type SourceFilter = 'All' | 'hopper' | 'feature' | 'manual';
 type FollowUpFilter = 'All' | 'NeedsFollowUp' | 'Ready';
+type StatusFilter = 'All' | 'Active' | 'Committed' | 'Icebox';
 
 export default function App() {
   const [features, setFeatures] = useState<Feature[]>(() => loadFeatures());
@@ -28,6 +29,7 @@ export default function App() {
   const [aorFilter, setAorFilter] = useState<AoR | 'All'>('All');
   const [sourceFilter, setSourceFilter] = useState<SourceFilter>('All');
   const [followUpFilter, setFollowUpFilter] = useState<FollowUpFilter>('All');
+  const [statusFilter, setStatusFilter] = useState<StatusFilter>('All');
   const [search, setSearch] = useState('');
   const [showAdd, setShowAdd] = useState(false);
   const [showAddStrategy, setShowAddStrategy] = useState(false);
@@ -52,10 +54,15 @@ export default function App() {
       if (sourceFilter !== 'All' && f.source !== sourceFilter) return false;
       if (followUpFilter === 'NeedsFollowUp' && !f.needsFollowUp) return false;
       if (followUpFilter === 'Ready' && f.needsFollowUp) return false;
+      if (statusFilter === 'Active' && f.planningStatus !== null) return false;
+      if (statusFilter === 'Committed' && f.planningStatus !== 'committed')
+        return false;
+      if (statusFilter === 'Icebox' && f.planningStatus !== 'icebox')
+        return false;
       if (q && !f.name.toLowerCase().includes(q)) return false;
       return true;
     });
-  }, [features, aorFilter, sourceFilter, followUpFilter, search]);
+  }, [features, aorFilter, sourceFilter, followUpFilter, statusFilter, search]);
 
   const totalArr = useMemo(
     () => filtered.reduce((sum, f) => sum + f.arr, 0),
@@ -123,6 +130,8 @@ export default function App() {
         onSourceFilterChange={setSourceFilter}
         followUpFilter={followUpFilter}
         onFollowUpFilterChange={setFollowUpFilter}
+        statusFilter={statusFilter}
+        onStatusFilterChange={setStatusFilter}
         search={search}
         onSearchChange={setSearch}
         count={filtered.length}

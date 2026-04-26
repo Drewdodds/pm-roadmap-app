@@ -16,6 +16,7 @@ export const sampleFeatures = (): Feature[] => [
     },
     source: 'feature',
     needsFollowUp: false,
+    planningStatus: null,
   },
   {
     id: crypto.randomUUID(),
@@ -30,6 +31,7 @@ export const sampleFeatures = (): Feature[] => [
     },
     source: 'hopper',
     needsFollowUp: false,
+    planningStatus: null,
   },
   {
     id: crypto.randomUUID(),
@@ -43,6 +45,7 @@ export const sampleFeatures = (): Feature[] => [
     },
     source: 'hopper',
     needsFollowUp: false,
+    planningStatus: null,
   },
   {
     id: crypto.randomUUID(),
@@ -57,6 +60,7 @@ export const sampleFeatures = (): Feature[] => [
     },
     source: 'feature',
     needsFollowUp: false,
+    planningStatus: null,
   },
   {
     id: crypto.randomUUID(),
@@ -70,5 +74,6 @@ export const sampleFeatures = (): Feature[] => [
     },
     source: 'hopper',
     needsFollowUp: false,
+    planningStatus: null,
   },
 ];

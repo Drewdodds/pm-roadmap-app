@@ -1,5 +1,5 @@
 import { useEffect, useLayoutEffect, useMemo, useState } from 'react';
-import type { AoR, Feature, ScoringKey } from '../types';
+import type { AoR, Feature, PlanningStatus, ScoringKey } from '../types';
 import { SCORING_KEYS, SCORING_LABELS, computeScore } from '../types';
 
 type SortKey = 'index' | 'score' | 'arr';
@@ -217,6 +217,13 @@ export const FeatureTable = ({
                 Source
               </th>
               <th
+                className="sticky z-[2] bg-primary-100 px-3 py-3 text-left"
+                style={stickyTop}
+                title="Tag features as Committed (next 1-2 quarters) or Icebox (deferred for now)."
+              >
+                Status
+              </th>
+              <th
                 className="sticky z-[2] bg-primary-100 px-3 py-3"
                 style={stickyTop}
               ></th>
@@ -226,7 +233,7 @@ export const FeatureTable = ({
             {sorted.map(({ f, score }, idx) => (
               <tr
                 key={f.id}
-                className="border-t border-primary-100 hover:bg-primary-50"
+                className={rowClass(f.planningStatus)}
               >
                 <td className="sticky left-0 z-[1] bg-white px-4 py-2 text-primary-300">
                   {idx + 1}
@@ -316,6 +323,14 @@ export const FeatureTable = ({
                     {f.source}
                   </span>
                 </td>
+                <td className="px-3 py-2">
+                  <PlanningStatusSelect
+                    value={f.planningStatus}
+                    onChange={(planningStatus) =>
+                      onChange(f.id, { planningStatus })
+                    }
+                  />
+                </td>
                 <td className="px-3 py-2 text-right">
                   <button
                     onClick={() => onDelete(f.id)}
@@ -389,4 +404,40 @@ const sourceChipClass = (source: string): string => {
   if (source === 'hopper') return 'bg-accent-lightPurple text-primary-900';
   if (source === 'feature') return 'bg-accent-blue text-primary-900';
   return 'bg-primary-100 text-primary-900';
+};
+
+const PlanningStatusSelect = ({
+  value,
+  onChange,
+}: {
+  value: PlanningStatus | null;
+  onChange: (v: PlanningStatus | null) => void;
+}) => (
+  <select
+    value={value ?? ''}
+    onChange={(e) =>
+      onChange((e.target.value || null) as PlanningStatus | null)
+    }
+    className={`rounded border px-2 py-1 text-xs focus:border-primary-500 focus:outline-none ${planningStatusSelectClass(value)}`}
+  >
+    <option value="">—</option>
+    <option value="committed">Committed</option>
+    <option value="icebox">Icebox</option>
+  </select>
+);
+
+const planningStatusSelectClass = (v: PlanningStatus | null): string => {
+  if (v === 'committed')
+    return 'border-accent-green bg-accent-green/10 text-primary-900 font-medium';
+  if (v === 'icebox')
+    return 'border-primary-300 bg-primary-100 text-primary-300';
+  return 'border-primary-200 bg-white';
+};
+
+const rowClass = (status: PlanningStatus | null): string => {
+  if (status === 'icebox')
+    return 'border-t border-primary-100 opacity-60 hover:bg-primary-50 hover:opacity-100';
+  if (status === 'committed')
+    return 'border-t border-primary-100 bg-accent-green/5 hover:bg-primary-50';
+  return 'border-t border-primary-100 hover:bg-primary-50';
 };
