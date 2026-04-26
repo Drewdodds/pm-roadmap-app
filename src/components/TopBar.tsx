@@ -5,6 +5,8 @@ interface Props {
   onAorFilterChange: (v: AoR | 'All') => void;
   sourceFilter: 'All' | 'hopper' | 'feature' | 'manual';
   onSourceFilterChange: (v: 'All' | 'hopper' | 'feature' | 'manual') => void;
+  followUpFilter: 'All' | 'NeedsFollowUp' | 'Ready';
+  onFollowUpFilterChange: (v: 'All' | 'NeedsFollowUp' | 'Ready') => void;
   search: string;
   onSearchChange: (v: string) => void;
   count: number;
@@ -120,6 +122,21 @@ export const TopBar = (p: Props) => {
                 { value: 'All', label: 'All' },
                 { value: 'Application', label: 'Application' },
                 { value: 'Profiles', label: 'Profiles' },
+              ]}
+            />
+          </div>
+
+          <div className="flex items-center gap-2">
+            <span className="text-xs font-medium uppercase tracking-wide text-primary-300">
+              Follow-up
+            </span>
+            <Seg
+              value={p.followUpFilter}
+              onChange={p.onFollowUpFilterChange}
+              options={[
+                { value: 'All', label: 'All' },
+                { value: 'NeedsFollowUp', label: 'Needs follow-up' },
+                { value: 'Ready', label: 'Ready' },
               ]}
             />
           </div>
