@@ -139,6 +139,28 @@ export default function App() {
     [features],
   );
 
+  const uncommittedArr = useMemo(
+    () =>
+      features
+        .filter((f) => f.planningStatus === null)
+        .reduce((s, f) => s + f.arr, 0),
+    [features],
+  );
+  const iceboxArr = useMemo(
+    () =>
+      features
+        .filter((f) => f.planningStatus === 'icebox')
+        .reduce((s, f) => s + f.arr, 0),
+    [features],
+  );
+  const committedArr = useMemo(
+    () =>
+      features
+        .filter((f) => f.planningStatus === 'committed')
+        .reduce((s, f) => s + f.arr, 0),
+    [features],
+  );
+
   const iceboxUncommitted = () => {
     if (uncommittedCount === 0) {
       alert('No uncommitted features to icebox.');
@@ -215,6 +237,9 @@ export default function App() {
         onClearAll={clearAll}
         onIceboxUncommitted={iceboxUncommitted}
         uncommittedCount={uncommittedCount}
+        uncommittedArr={uncommittedArr}
+        iceboxArr={iceboxArr}
+        committedArr={committedArr}
         layoutWidth={effectiveLayoutWidth}
         layoutWidthChanged={layoutWidthChanged}
         onResetLayoutWidth={resetLayoutWidth}
