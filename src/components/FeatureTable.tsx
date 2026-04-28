@@ -428,7 +428,7 @@ const PlanningStatusSelect = ({
 
 const planningStatusSelectClass = (v: PlanningStatus | null): string => {
   if (v === 'committed')
-    return 'border-accent-green bg-accent-green/10 text-primary-900 font-medium';
+    return 'border-[#31eb14] bg-[#31eb14] text-primary-900 font-medium';
   if (v === 'icebox')
     return 'border-primary-300 bg-primary-100 text-primary-300';
   return 'border-primary-200 bg-white';
@@ -438,6 +438,6 @@ const rowClass = (status: PlanningStatus | null): string => {
   if (status === 'icebox')
     return 'border-t border-primary-100 opacity-60 hover:bg-primary-50 hover:opacity-100';
   if (status === 'committed')
-    return 'border-t border-primary-100 bg-accent-green/5 hover:bg-primary-50';
+    return 'border-t border-primary-100 bg-[#9ff393] hover:bg-primary-50';
   return 'border-t border-primary-100 hover:bg-primary-50';
 };
