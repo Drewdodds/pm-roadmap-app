@@ -438,6 +438,6 @@ const rowClass = (status: PlanningStatus | null): string => {
   if (status === 'icebox')
     return 'border-t border-primary-100 opacity-60 hover:bg-primary-50 hover:opacity-100';
   if (status === 'committed')
-    return 'border-t border-primary-100 bg-[#9ff393] hover:bg-primary-50';
+    return 'border-t border-primary-100 hover:bg-primary-50';
   return 'border-t border-primary-100 hover:bg-primary-50';
 };
