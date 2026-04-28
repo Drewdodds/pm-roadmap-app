@@ -422,7 +422,7 @@ const PlanningStatusSelect = ({
   >
     <option value="">—</option>
     <option value="committed">Committed</option>
-    <option value="icebox">Icebox</option>
+    <option value="icebox">Icebox 🧊</option>
   </select>
 );
 
@@ -430,7 +430,7 @@ const planningStatusSelectClass = (v: PlanningStatus | null): string => {
   if (v === 'committed')
     return 'border-[#31eb14] bg-[#31eb14] text-primary-900 font-medium';
   if (v === 'icebox')
-    return 'border-primary-300 bg-primary-100 text-primary-300';
+    return 'border-primary-300 bg-primary-100 text-primary-900 font-semibold text-left';
   return 'border-primary-200 bg-white';
 };
 
