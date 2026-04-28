@@ -6,13 +6,17 @@ import { ContextCard } from './components/ContextCard';
 import { ContextItemModal } from './components/ContextItemModal';
 import type { AoR, ContextItem, Feature, ScoringKey } from './types';
 import {
+  DEFAULT_LAYOUT_WIDTH,
+  MIN_LAYOUT_WIDTH,
   exportCSV,
   exportJSON,
   importJSON,
   loadContextItems,
   loadFeatures,
+  loadLayoutWidth,
   saveContextItems,
   saveFeatures,
+  saveLayoutWidth,
 } from './storage';
 import { sampleFeatures } from './sampleData';
 
@@ -34,6 +38,50 @@ export default function App() {
   const [showAdd, setShowAdd] = useState(false);
   const [showAddStrategy, setShowAddStrategy] = useState(false);
   const [showAddOst, setShowAddOst] = useState(false);
+  const [layoutWidth, setLayoutWidth] = useState<number>(loadLayoutWidth);
+  const [viewportWidth, setViewportWidth] = useState<number>(() =>
+    typeof window !== 'undefined' ? window.innerWidth : DEFAULT_LAYOUT_WIDTH,
+  );
+
+  useEffect(() => {
+    saveLayoutWidth(layoutWidth);
+  }, [layoutWidth]);
+
+  useEffect(() => {
+    const onResize = () => setViewportWidth(window.innerWidth);
+    window.addEventListener('resize', onResize);
+    return () => window.removeEventListener('resize', onResize);
+  }, []);
+
+  const maxLayoutWidth = Math.max(MIN_LAYOUT_WIDTH, viewportWidth - 48);
+  const effectiveLayoutWidth = Math.min(layoutWidth, maxLayoutWidth);
+  const layoutWidthChanged = layoutWidth !== DEFAULT_LAYOUT_WIDTH;
+
+  const startLayoutResize = (e: React.PointerEvent) => {
+    e.preventDefault();
+    const startX = e.clientX;
+    const startWidth = effectiveLayoutWidth;
+    const handleMove = (ev: PointerEvent) => {
+      const dx = ev.clientX - startX;
+      const next = Math.max(
+        MIN_LAYOUT_WIDTH,
+        Math.min(maxLayoutWidth, startWidth + 2 * dx),
+      );
+      setLayoutWidth(next);
+    };
+    const handleUp = () => {
+      window.removeEventListener('pointermove', handleMove);
+      window.removeEventListener('pointerup', handleUp);
+      document.body.style.cursor = '';
+      document.body.style.userSelect = '';
+    };
+    document.body.style.cursor = 'col-resize';
+    document.body.style.userSelect = 'none';
+    window.addEventListener('pointermove', handleMove);
+    window.addEventListener('pointerup', handleUp);
+  };
+
+  const resetLayoutWidth = () => setLayoutWidth(DEFAULT_LAYOUT_WIDTH);
 
   useEffect(() => {
     saveFeatures(features);
@@ -167,8 +215,14 @@ export default function App() {
         onClearAll={clearAll}
         onIceboxUncommitted={iceboxUncommitted}
         uncommittedCount={uncommittedCount}
+        layoutWidth={effectiveLayoutWidth}
+        layoutWidthChanged={layoutWidthChanged}
+        onResetLayoutWidth={resetLayoutWidth}
       />
-      <div className="mx-auto max-w-[2100px] px-6 py-6">
+      <div
+        className="relative mx-auto px-6 py-6"
+        style={{ maxWidth: effectiveLayoutWidth }}
+      >
         <div className="flex gap-4">
           <aside className="hidden w-72 shrink-0 xl:block">
             <div className="sticky top-[160px] max-h-[calc(100vh-180px)] space-y-4 overflow-y-auto pr-1">
@@ -197,6 +251,15 @@ export default function App() {
             />
           </main>
         </div>
+        <span
+          onPointerDown={startLayoutResize}
+          onDoubleClick={resetLayoutWidth}
+          role="separator"
+          aria-orientation="vertical"
+          aria-label="Resize layout width"
+          title="Drag to resize layout. Double-click to reset."
+          className="absolute right-0 top-0 z-[5] h-full w-2 cursor-col-resize touch-none select-none bg-transparent hover:bg-primary-300"
+        />
       </div>
       {showAdd && (
         <AddFeatureModal

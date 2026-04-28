@@ -6,6 +6,25 @@ const CONTEXT_KEYS: Record<ContextKind, string> = {
   strategies: 'pm-roadmap-app:strategies:v1',
   osts: 'pm-roadmap-app:osts:v1',
 };
+const LAYOUT_WIDTH_KEY = 'pm-roadmap-app:layoutWidth:v1';
+
+export const DEFAULT_LAYOUT_WIDTH = 2100;
+export const MIN_LAYOUT_WIDTH = 1280;
+
+export const loadLayoutWidth = (): number => {
+  try {
+    const raw = localStorage.getItem(LAYOUT_WIDTH_KEY);
+    const n = raw ? Number(raw) : DEFAULT_LAYOUT_WIDTH;
+    if (!Number.isFinite(n)) return DEFAULT_LAYOUT_WIDTH;
+    return Math.max(MIN_LAYOUT_WIDTH, n);
+  } catch {
+    return DEFAULT_LAYOUT_WIDTH;
+  }
+};
+
+export const saveLayoutWidth = (px: number): void => {
+  localStorage.setItem(LAYOUT_WIDTH_KEY, String(px));
+};
 
 export const loadContextItems = (kind: ContextKind): ContextItem[] => {
   try {
