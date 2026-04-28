@@ -21,6 +21,9 @@ interface Props {
   onClearAll: () => void;
   onIceboxUncommitted: () => void;
   uncommittedCount: number;
+  layoutWidth: number;
+  layoutWidthChanged: boolean;
+  onResetLayoutWidth: () => void;
 }
 
 const Seg = <T extends string>({
@@ -55,7 +58,7 @@ export const TopBar = (p: Props) => {
   };
   return (
     <header className="sticky top-0 z-10 border-b border-primary-200 bg-white">
-      <div className="mx-auto max-w-[2100px] px-6 py-4">
+      <div className="mx-auto px-6 py-4" style={{ maxWidth: p.layoutWidth }}>
         <div className="flex items-center justify-between gap-4">
           <div>
             <h1 className="text-xl font-semibold leading-tight">
@@ -177,8 +180,17 @@ export const TopBar = (p: Props) => {
             />
           </div>
 
+          {p.layoutWidthChanged && (
+            <button
+              className="btn-secondary ml-auto"
+              onClick={p.onResetLayoutWidth}
+              title="Reset layout width to default"
+            >
+              Reset width
+            </button>
+          )}
           <button
-            className="btn-secondary ml-auto"
+            className={`btn-secondary ${p.layoutWidthChanged ? '' : 'ml-auto'}`}
             onClick={p.onIceboxUncommitted}
             disabled={p.uncommittedCount === 0}
             title="Move all features still in Reviewing status to Icebox"
