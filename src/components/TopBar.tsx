@@ -7,8 +7,8 @@ interface Props {
   onSourceFilterChange: (v: 'All' | 'hopper' | 'feature' | 'manual') => void;
   followUpFilter: 'All' | 'NeedsFollowUp' | 'Ready';
   onFollowUpFilterChange: (v: 'All' | 'NeedsFollowUp' | 'Ready') => void;
-  statusFilter: 'All' | 'Active' | 'Committed' | 'Icebox';
-  onStatusFilterChange: (v: 'All' | 'Active' | 'Committed' | 'Icebox') => void;
+  statusFilter: 'All' | 'Reviewing' | 'Committed' | 'Icebox';
+  onStatusFilterChange: (v: 'All' | 'Reviewing' | 'Committed' | 'Icebox') => void;
   search: string;
   onSearchChange: (v: string) => void;
   count: number;
@@ -19,6 +19,8 @@ interface Props {
   onExportJson: () => void;
   onExportCsv: () => void;
   onClearAll: () => void;
+  onIceboxUncommitted: () => void;
+  uncommittedCount: number;
 }
 
 const Seg = <T extends string>({
@@ -168,14 +170,22 @@ export const TopBar = (p: Props) => {
               onChange={p.onStatusFilterChange}
               options={[
                 { value: 'All', label: 'All' },
-                { value: 'Active', label: 'Active' },
+                { value: 'Reviewing', label: 'Reviewing' },
                 { value: 'Committed', label: 'Committed' },
                 { value: 'Icebox', label: 'Icebox' },
               ]}
             />
           </div>
 
-          <div className="ml-auto flex-1 min-w-[200px] max-w-md">
+          <button
+            className="btn-secondary ml-auto"
+            onClick={p.onIceboxUncommitted}
+            disabled={p.uncommittedCount === 0}
+            title="Move all features still in Reviewing status to Icebox"
+          >
+            Icebox Uncommitted ({p.uncommittedCount})
+          </button>
+          <div className="flex-1 min-w-[200px] max-w-md">
             <input
               className="input"
               placeholder="Search by name…"
