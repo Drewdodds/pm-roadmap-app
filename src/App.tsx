@@ -18,7 +18,7 @@ import { sampleFeatures } from './sampleData';
 
 type SourceFilter = 'All' | 'hopper' | 'feature' | 'manual';
 type FollowUpFilter = 'All' | 'NeedsFollowUp' | 'Ready';
-type StatusFilter = 'All' | 'Active' | 'Committed' | 'Icebox';
+type StatusFilter = 'All' | 'Reviewing' | 'Committed' | 'Icebox';
 
 export default function App() {
   const [features, setFeatures] = useState<Feature[]>(() => loadFeatures());
@@ -54,7 +54,7 @@ export default function App() {
       if (sourceFilter !== 'All' && f.source !== sourceFilter) return false;
       if (followUpFilter === 'NeedsFollowUp' && !f.needsFollowUp) return false;
       if (followUpFilter === 'Ready' && f.needsFollowUp) return false;
-      if (statusFilter === 'Active' && f.planningStatus !== null) return false;
+      if (statusFilter === 'Reviewing' && f.planningStatus !== null) return false;
       if (statusFilter === 'Committed' && f.planningStatus !== 'committed')
         return false;
       if (statusFilter === 'Icebox' && f.planningStatus !== 'icebox')
@@ -85,6 +85,29 @@ export default function App() {
 
   const deleteFeature = (id: string) =>
     setFeatures((prev) => prev.filter((f) => f.id !== id));
+
+  const uncommittedCount = useMemo(
+    () => features.filter((f) => f.planningStatus === null).length,
+    [features],
+  );
+
+  const iceboxUncommitted = () => {
+    if (uncommittedCount === 0) {
+      alert('No uncommitted features to icebox.');
+      return;
+    }
+    if (
+      !confirm(
+        `Move ${uncommittedCount} uncommitted ${uncommittedCount === 1 ? 'feature' : 'features'} to Icebox?`,
+      )
+    )
+      return;
+    setFeatures((prev) =>
+      prev.map((f) =>
+        f.planningStatus === null ? { ...f, planningStatus: 'icebox' } : f,
+      ),
+    );
+  };
 
   const addFeature = (f: Feature) => setFeatures((prev) => [f, ...prev]);
 
@@ -142,6 +165,8 @@ export default function App() {
         onExportJson={() => exportJSON(features)}
         onExportCsv={() => exportCSV(features)}
         onClearAll={clearAll}
+        onIceboxUncommitted={iceboxUncommitted}
+        uncommittedCount={uncommittedCount}
       />
       <div className="mx-auto max-w-[2100px] px-6 py-6">
         <div className="flex gap-4">
