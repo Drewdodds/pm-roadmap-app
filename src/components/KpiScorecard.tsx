@@ -7,9 +7,9 @@ interface Props {
 
 export const KpiScorecard = ({ label, value, emoji, bgClass }: Props) => (
   <div
-    className={`flex min-w-[200px] flex-col justify-center rounded-lg border-2 border-black px-5 py-3 ${bgClass}`}
+    className={`flex w-[200px] flex-col justify-center rounded-lg border-2 border-black px-5 py-3 ${bgClass}`}
   >
-    <div className="flex items-center justify-between gap-3">
+    <div className="flex min-h-[1.875rem] items-center justify-between gap-3">
       <span className="text-xs font-semibold uppercase tracking-wide text-primary-900">
         {label}
       </span>
