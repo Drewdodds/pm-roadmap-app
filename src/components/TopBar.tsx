@@ -1,4 +1,5 @@
 import type { AoR } from '../types';
+import { KpiScorecard } from './KpiScorecard';
 
 interface Props {
   aorFilter: AoR | 'All';
@@ -21,6 +22,8 @@ interface Props {
   onClearAll: () => void;
   onIceboxUncommitted: () => void;
   uncommittedCount: number;
+  iceboxCount: number;
+  committedCount: number;
   layoutWidth: number;
   layoutWidthChanged: boolean;
   onResetLayoutWidth: () => void;
@@ -58,8 +61,8 @@ export const TopBar = (p: Props) => {
   };
   return (
     <header className="sticky top-0 z-10 border-b border-primary-200 bg-white">
-      <div className="mx-auto px-6 py-4" style={{ maxWidth: p.layoutWidth }}>
-        <div className="flex items-center justify-between gap-4">
+      <div className="mx-auto px-6 py-5" style={{ maxWidth: p.layoutWidth }}>
+        <div className="flex items-center gap-4">
           <div>
             <h1 className="text-xl font-semibold leading-tight">
               Roadmap Scorer
@@ -69,7 +72,25 @@ export const TopBar = (p: Props) => {
               {formatArr(p.totalArr)}
             </p>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-3">
+            <KpiScorecard
+              label="Uncommitted"
+              value={String(p.uncommittedCount)}
+              bgClass="bg-white"
+            />
+            <KpiScorecard
+              label="Iceboxed"
+              value={String(p.iceboxCount)}
+              emoji="🧊"
+              bgClass="bg-[#BEF1F9]"
+            />
+            <KpiScorecard
+              label="Committed"
+              value={String(p.committedCount)}
+              bgClass="bg-[#E8FDEF]"
+            />
+          </div>
+          <div className="ml-auto flex items-center gap-2">
             <button
               className="btn-secondary"
               onClick={p.onLoadSample}

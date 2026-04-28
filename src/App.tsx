@@ -139,6 +139,15 @@ export default function App() {
     [features],
   );
 
+  const iceboxCount = useMemo(
+    () => features.filter((f) => f.planningStatus === 'icebox').length,
+    [features],
+  );
+  const committedCount = useMemo(
+    () => features.filter((f) => f.planningStatus === 'committed').length,
+    [features],
+  );
+
   const iceboxUncommitted = () => {
     if (uncommittedCount === 0) {
       alert('No uncommitted features to icebox.');
@@ -215,6 +224,8 @@ export default function App() {
         onClearAll={clearAll}
         onIceboxUncommitted={iceboxUncommitted}
         uncommittedCount={uncommittedCount}
+        iceboxCount={iceboxCount}
+        committedCount={committedCount}
         layoutWidth={effectiveLayoutWidth}
         layoutWidthChanged={layoutWidthChanged}
         onResetLayoutWidth={resetLayoutWidth}
