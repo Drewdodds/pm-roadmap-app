@@ -107,9 +107,9 @@ export const FeatureTable = ({
 
   if (features.length === 0) {
     return (
-      <div className="rounded-lg border border-dashed border-primary-200 bg-white px-6 py-16 text-center">
+      <div className="rounded-lg border border-dashed border-primary-200 bg-white px-6 py-16 text-center dark:border-slate-700 dark:bg-slate-800">
         <h2 className="text-lg font-semibold">No features yet</h2>
-        <p className="mt-2 text-sm text-primary-300">
+        <p className="mt-2 text-sm text-primary-300 dark:text-slate-400">
           Add a feature manually, load sample data, or import a JSON file.
           <br />
           When the Notion MCP is connected, ask Claude to sync Drew Dodds’ assigned
@@ -132,16 +132,19 @@ export const FeatureTable = ({
       ? { maxHeight: `calc(100vh - ${headerOffset + 60}px)` }
       : undefined;
 
+  const headerCellClass =
+    'sticky z-[2] bg-primary-100 px-3 py-3 text-left dark:bg-slate-800';
+
   return (
     <div
-      className="overflow-auto rounded-lg border border-primary-200 bg-white shadow-sm"
+      className="overflow-auto rounded-lg border border-primary-200 bg-white shadow-sm dark:border-slate-700 dark:bg-slate-800"
       style={wrapperStyle}
     >
       <table className="min-w-full text-sm">
-          <thead className="text-xs uppercase tracking-wide text-primary-900">
+          <thead className="text-xs uppercase tracking-wide text-primary-900 dark:text-slate-100">
             <tr>
               <th
-                className="sticky left-0 z-[3] bg-primary-100 px-4 py-3 text-left"
+                className="sticky left-0 z-[3] bg-primary-100 px-4 py-3 text-left dark:bg-slate-800"
                 style={stickyTop}
               >
                 <SortHeader
@@ -152,7 +155,7 @@ export const FeatureTable = ({
                 />
               </th>
               <th
-                className="sticky z-[2] bg-primary-100 px-4 py-3 text-left"
+                className="sticky z-[2] bg-primary-100 px-4 py-3 text-left dark:bg-slate-800"
                 style={stickyNameStyle}
               >
                 Feature
@@ -162,17 +165,14 @@ export const FeatureTable = ({
                   aria-orientation="vertical"
                   aria-label="Resize feature column"
                   title="Drag to resize"
-                  className="absolute right-0 top-0 h-full w-1.5 cursor-col-resize touch-none select-none bg-transparent hover:bg-primary-300"
+                  className="absolute right-0 top-0 h-full w-1.5 cursor-col-resize touch-none select-none bg-transparent hover:bg-primary-300 dark:hover:bg-slate-600"
                 />
               </th>
-              <th
-                className="sticky z-[2] bg-primary-100 px-4 py-3 text-left"
-                style={stickyTop}
-              >
+              <th className={headerCellClass} style={stickyTop}>
                 AoR
               </th>
               <th
-                className="sticky z-[2] bg-primary-100 px-3 py-3 text-left"
+                className={headerCellClass}
                 style={stickyTop}
                 title="Flag features that need more research before scoring. Does not contribute to score."
               >
@@ -181,7 +181,7 @@ export const FeatureTable = ({
               {SCORING_KEYS.map((k) => (
                 <th
                   key={k}
-                  className="sticky z-[2] bg-primary-100 px-3 py-3 text-center"
+                  className="sticky z-[2] bg-primary-100 px-3 py-3 text-center dark:bg-slate-800"
                   style={stickyTop}
                   title={k}
                 >
@@ -189,7 +189,7 @@ export const FeatureTable = ({
                 </th>
               ))}
               <th
-                className="sticky z-[2] bg-primary-100 px-3 py-3 text-right"
+                className="sticky z-[2] bg-primary-100 px-3 py-3 text-right dark:bg-slate-800"
                 style={stickyTop}
               >
                 <SortHeader
@@ -200,7 +200,7 @@ export const FeatureTable = ({
                 />
               </th>
               <th
-                className="sticky z-[2] bg-primary-100 px-3 py-3 text-right"
+                className="sticky z-[2] bg-primary-100 px-3 py-3 text-right dark:bg-slate-800"
                 style={stickyTop}
               >
                 <SortHeader
@@ -210,21 +210,18 @@ export const FeatureTable = ({
                   onClick={() => onSortClick('arr')}
                 />
               </th>
-              <th
-                className="sticky z-[2] bg-primary-100 px-3 py-3 text-left"
-                style={stickyTop}
-              >
+              <th className={headerCellClass} style={stickyTop}>
                 Source
               </th>
               <th
-                className="sticky z-[2] bg-primary-100 px-3 py-3 text-left"
+                className={headerCellClass}
                 style={stickyTop}
                 title="Tag features as Committed (next 1-2 quarters) or Icebox (deferred for now)."
               >
                 Status
               </th>
               <th
-                className="sticky z-[2] bg-primary-100 px-3 py-3"
+                className="sticky z-[2] bg-primary-100 px-3 py-3 dark:bg-slate-800"
                 style={stickyTop}
               ></th>
             </tr>
@@ -235,12 +232,12 @@ export const FeatureTable = ({
                 key={f.id}
                 className={rowClass(f.planningStatus)}
               >
-                <td className="sticky left-0 z-[1] bg-white px-4 py-2 text-primary-300">
+                <td className="sticky left-0 z-[1] bg-white px-4 py-2 text-primary-300 dark:bg-slate-800 dark:text-slate-500">
                   {idx + 1}
                 </td>
                 <td className="px-4 py-2 align-top" style={nameColStyle}>
                   <input
-                    className="block w-full bg-transparent text-primary-900 focus:outline-none"
+                    className="block w-full bg-transparent text-primary-900 focus:outline-none dark:text-slate-100"
                     value={f.name}
                     title={f.name}
                     onChange={(e) =>
@@ -252,7 +249,7 @@ export const FeatureTable = ({
                       href={f.notionUrl}
                       target="_blank"
                       rel="noreferrer"
-                      className="text-[10px] text-primary-500 hover:underline"
+                      className="text-[10px] text-primary-500 hover:underline dark:text-primary-400"
                     >
                       open in Notion ↗
                     </a>
@@ -272,7 +269,7 @@ export const FeatureTable = ({
                       onChange={(e) =>
                         onChange(f.id, { needsFollowUp: e.target.checked })
                       }
-                      className="h-4 w-4 cursor-pointer rounded border-primary-300 text-amber-500 focus:ring-amber-500"
+                      className="h-4 w-4 cursor-pointer rounded border-primary-300 text-amber-500 focus:ring-amber-500 dark:border-slate-600 dark:bg-slate-700"
                       title="Needs follow-up"
                     />
                     <input
@@ -284,7 +281,7 @@ export const FeatureTable = ({
                           followUpNote: e.target.value || undefined,
                         })
                       }
-                      className="w-36 rounded border border-transparent bg-transparent px-1 py-0.5 text-xs hover:border-primary-200 focus:border-primary-500 focus:outline-none"
+                      className="w-36 rounded border border-transparent bg-transparent px-1 py-0.5 text-xs hover:border-primary-200 focus:border-primary-500 focus:outline-none dark:text-slate-100 dark:placeholder:text-slate-500 dark:hover:border-slate-600"
                     />
                   </div>
                 </td>
@@ -294,7 +291,7 @@ export const FeatureTable = ({
                       type="checkbox"
                       checked={f.scores[k]}
                       onChange={() => onToggleScore(f.id, k)}
-                      className="h-4 w-4 cursor-pointer rounded border-primary-300 text-primary-500 focus:ring-primary-500"
+                      className="h-4 w-4 cursor-pointer rounded border-primary-300 text-primary-500 focus:ring-primary-500 dark:border-slate-600 dark:bg-slate-700"
                     />
                   </td>
                 ))}
@@ -315,7 +312,7 @@ export const FeatureTable = ({
                     onChange={(e) =>
                       onChange(f.id, { arr: Number(e.target.value) || 0 })
                     }
-                    className="w-28 rounded border border-transparent bg-transparent px-1 py-0.5 text-right tabular-nums hover:border-primary-200 focus:border-primary-500 focus:outline-none"
+                    className="w-28 rounded border border-transparent bg-transparent px-1 py-0.5 text-right tabular-nums hover:border-primary-200 focus:border-primary-500 focus:outline-none dark:text-slate-100 dark:hover:border-slate-600"
                   />
                 </td>
                 <td className="px-3 py-2">
@@ -334,7 +331,7 @@ export const FeatureTable = ({
                 <td className="px-3 py-2 text-right">
                   <button
                     onClick={() => onDelete(f.id)}
-                    className="text-xs text-primary-300 hover:text-red-600"
+                    className="text-xs text-primary-300 hover:text-red-600 dark:text-slate-500 dark:hover:text-red-400"
                     aria-label="Delete"
                   >
                     ✕
@@ -361,9 +358,7 @@ const SortHeader = ({
 }) => (
   <button
     onClick={onClick}
-    className={`inline-flex items-center gap-1 uppercase tracking-wide text-xs font-medium transition-colors ${
-      active ? 'text-primary-900' : 'text-primary-900 hover:text-primary-900'
-    }`}
+    className="inline-flex items-center gap-1 uppercase tracking-wide text-xs font-medium text-primary-900 transition-colors dark:text-slate-100"
     title={active ? `Sorted ${dir === 'desc' ? 'descending' : 'ascending'} — click to toggle` : `Sort by ${label}`}
   >
     {label}
@@ -385,7 +380,7 @@ const AoRSelect = ({
     onChange={(e) =>
       onChange((e.target.value || null) as AoR | null)
     }
-    className="rounded border border-primary-200 bg-white px-2 py-1 text-xs focus:border-primary-500 focus:outline-none"
+    className="rounded border border-primary-200 bg-white px-2 py-1 text-xs focus:border-primary-500 focus:outline-none dark:border-slate-600 dark:bg-slate-700 dark:text-slate-100"
   >
     <option value="">—</option>
     <option value="Application">Application</option>
@@ -394,16 +389,16 @@ const AoRSelect = ({
 );
 
 const scoreChipClass = (score: number): string => {
-  if (score >= 5) return 'bg-accent-green/20 text-primary-900';
-  if (score >= 3) return 'bg-accent-blue text-primary-900';
-  if (score >= 1) return 'bg-primary-100 text-primary-900';
-  return 'bg-primary-50 text-primary-300';
+  if (score >= 5) return 'bg-accent-green/20 text-primary-900 dark:bg-accent-green/30 dark:text-slate-100';
+  if (score >= 3) return 'bg-accent-blue text-primary-900 dark:bg-[#2c4a6e] dark:text-slate-100';
+  if (score >= 1) return 'bg-primary-100 text-primary-900 dark:bg-slate-700 dark:text-slate-100';
+  return 'bg-primary-50 text-primary-300 dark:bg-slate-800 dark:text-slate-500';
 };
 
 const sourceChipClass = (source: string): string => {
-  if (source === 'hopper') return 'bg-accent-lightPurple text-primary-900';
-  if (source === 'feature') return 'bg-accent-blue text-primary-900';
-  return 'bg-primary-100 text-primary-900';
+  if (source === 'hopper') return 'bg-accent-lightPurple text-primary-900 dark:bg-[#3b3357] dark:text-slate-100';
+  if (source === 'feature') return 'bg-accent-blue text-primary-900 dark:bg-[#2c4a6e] dark:text-slate-100';
+  return 'bg-primary-100 text-primary-900 dark:bg-slate-700 dark:text-slate-100';
 };
 
 const PlanningStatusSelect = ({
@@ -428,16 +423,14 @@ const PlanningStatusSelect = ({
 
 const planningStatusSelectClass = (v: PlanningStatus | null): string => {
   if (v === 'committed')
-    return 'border-[#31eb14] bg-[#31eb14] text-primary-900 font-medium';
+    return 'border-[#31eb14] bg-[#31eb14] text-primary-900 font-medium dark:border-[#4ea83a] dark:bg-[#4ea83a] dark:text-slate-100';
   if (v === 'icebox')
-    return 'border-primary-300 bg-primary-100 text-primary-900 font-semibold text-left';
-  return 'border-primary-200 bg-white';
+    return 'border-primary-300 bg-primary-100 text-primary-900 font-semibold text-left dark:border-slate-600 dark:bg-slate-700 dark:text-slate-100';
+  return 'border-primary-200 bg-white dark:border-slate-600 dark:bg-slate-700 dark:text-slate-100';
 };
 
 const rowClass = (status: PlanningStatus | null): string => {
   if (status === 'icebox')
-    return 'border-t border-primary-100 opacity-60 hover:bg-primary-50 hover:opacity-100';
-  if (status === 'committed')
-    return 'border-t border-primary-100 hover:bg-primary-50';
-  return 'border-t border-primary-100 hover:bg-primary-50';
+    return 'border-t border-primary-100 opacity-60 hover:bg-primary-50 hover:opacity-100 dark:border-slate-700 dark:hover:bg-slate-700/50';
+  return 'border-t border-primary-100 hover:bg-primary-50 dark:border-slate-700 dark:hover:bg-slate-700/50';
 };
