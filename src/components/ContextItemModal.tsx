@@ -32,17 +32,17 @@ export const ContextItemModal = ({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-primary-900/40"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-primary-900/40 dark:bg-black/60"
       onClick={onClose}
     >
       <form
         onClick={(e) => e.stopPropagation()}
         onSubmit={submit}
-        className="w-full max-w-md rounded-lg bg-white p-6 shadow-xl"
+        className="w-full max-w-md rounded-lg bg-white p-6 shadow-xl dark:bg-slate-800 dark:border dark:border-slate-700"
       >
         <h2 className="text-lg font-semibold">Add {label}</h2>
 
-        <label className="mt-4 block text-xs font-medium text-primary-900">
+        <label className="mt-4 block text-xs font-medium text-primary-900 dark:text-slate-100">
           Title
         </label>
         <input
@@ -53,7 +53,7 @@ export const ContextItemModal = ({
           onChange={(e) => setTitle(e.target.value)}
         />
 
-        <label className="mt-3 block text-xs font-medium text-primary-900">
+        <label className="mt-3 block text-xs font-medium text-primary-900 dark:text-slate-100">
           Description
         </label>
         <textarea

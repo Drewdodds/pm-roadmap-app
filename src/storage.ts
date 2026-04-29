@@ -7,9 +7,24 @@ const CONTEXT_KEYS: Record<ContextKind, string> = {
   osts: 'pm-roadmap-app:osts:v1',
 };
 const LAYOUT_WIDTH_KEY = 'pm-roadmap-app:layoutWidth:v1';
+const THEME_KEY = 'pm-roadmap-app:theme:v1';
 
 export const DEFAULT_LAYOUT_WIDTH = 2100;
 export const MIN_LAYOUT_WIDTH = 1280;
+
+export type Theme = 'light' | 'dark';
+
+export const loadTheme = (): Theme => {
+  try {
+    return localStorage.getItem(THEME_KEY) === 'dark' ? 'dark' : 'light';
+  } catch {
+    return 'light';
+  }
+};
+
+export const saveTheme = (t: Theme): void => {
+  localStorage.setItem(THEME_KEY, t);
+};
 
 export const loadLayoutWidth = (): number => {
   try {

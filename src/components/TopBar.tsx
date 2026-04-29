@@ -1,5 +1,6 @@
 import type { AoR } from '../types';
 import { KpiScorecard } from './KpiScorecard';
+import { ThemeToggle } from './ThemeToggle';
 
 interface Props {
   aorFilter: AoR | 'All';
@@ -38,7 +39,7 @@ const Seg = <T extends string>({
   options: { value: T; label: string }[];
   onChange: (v: T) => void;
 }) => (
-  <div className="inline-flex rounded-md border border-primary-200 bg-white p-0.5">
+  <div className="inline-flex rounded-md border border-primary-200 bg-white p-0.5 dark:border-slate-700 dark:bg-slate-800">
     {options.map((o) => (
       <button
         key={o.value}
@@ -46,7 +47,7 @@ const Seg = <T extends string>({
         className={`rounded px-3 py-1 text-sm font-medium transition-colors ${
           value === o.value
             ? 'bg-primary-500 text-white'
-            : 'text-primary-900 hover:bg-primary-100'
+            : 'text-primary-900 hover:bg-primary-100 dark:text-slate-100 dark:hover:bg-slate-700'
         }`}
       >
         {o.label}
@@ -60,14 +61,14 @@ export const TopBar = (p: Props) => {
     if (el) (window as unknown as { _importInput: HTMLInputElement })._importInput = el;
   };
   return (
-    <header className="sticky top-0 z-10 border-b border-primary-200 bg-white">
+    <header className="sticky top-0 z-10 border-b border-primary-200 bg-white dark:border-slate-700 dark:bg-slate-900">
       <div className="mx-auto px-6 py-5" style={{ maxWidth: p.layoutWidth }}>
         <div className="flex items-center gap-4">
           <div>
             <h1 className="text-xl font-semibold leading-tight">
               Roadmap Scorer
             </h1>
-            <p className="text-xs text-primary-300">
+            <p className="text-xs text-primary-300 dark:text-slate-400">
               {p.count} {p.count === 1 ? 'feature' : 'features'} · ARR total{' '}
               {formatArr(p.totalArr)}
             </p>
@@ -76,18 +77,18 @@ export const TopBar = (p: Props) => {
             <KpiScorecard
               label="Uncommitted"
               value={String(p.uncommittedCount)}
-              bgClass="bg-white"
+              bgClass="bg-white dark:bg-slate-800"
             />
             <KpiScorecard
               label="Iceboxed"
               value={String(p.iceboxCount)}
               emoji="🧊"
-              bgClass="bg-[#BEF1F9]"
+              bgClass="bg-[#BEF1F9] dark:bg-[#1e3a3f]"
             />
             <KpiScorecard
               label="Committed"
               value={String(p.committedCount)}
-              bgClass="bg-[#E8FDEF]"
+              bgClass="bg-[#E8FDEF] dark:bg-[#1d3a26]"
             />
           </div>
           <div className="ml-auto flex items-center gap-2">
@@ -140,7 +141,7 @@ export const TopBar = (p: Props) => {
 
         <div className="mt-4 flex flex-wrap items-center gap-4">
           <div className="flex items-center gap-2">
-            <span className="text-xs font-medium uppercase tracking-wide text-primary-300">
+            <span className="text-xs font-medium uppercase tracking-wide text-primary-300 dark:text-slate-400">
               AoR
             </span>
             <Seg
@@ -155,7 +156,7 @@ export const TopBar = (p: Props) => {
           </div>
 
           <div className="flex items-center gap-2">
-            <span className="text-xs font-medium uppercase tracking-wide text-primary-300">
+            <span className="text-xs font-medium uppercase tracking-wide text-primary-300 dark:text-slate-400">
               Follow-up
             </span>
             <Seg
@@ -170,7 +171,7 @@ export const TopBar = (p: Props) => {
           </div>
 
           <div className="flex items-center gap-2">
-            <span className="text-xs font-medium uppercase tracking-wide text-primary-300">
+            <span className="text-xs font-medium uppercase tracking-wide text-primary-300 dark:text-slate-400">
               Source
             </span>
             <Seg
@@ -186,7 +187,7 @@ export const TopBar = (p: Props) => {
           </div>
 
           <div className="flex items-center gap-2">
-            <span className="text-xs font-medium uppercase tracking-wide text-primary-300">
+            <span className="text-xs font-medium uppercase tracking-wide text-primary-300 dark:text-slate-400">
               Status
             </span>
             <Seg
@@ -201,23 +202,26 @@ export const TopBar = (p: Props) => {
             />
           </div>
 
-          {p.layoutWidthChanged && (
+          <div className="ml-auto flex items-center gap-2">
+            <ThemeToggle />
+            {p.layoutWidthChanged && (
+              <button
+                className="btn-secondary"
+                onClick={p.onResetLayoutWidth}
+                title="Reset layout width to default"
+              >
+                Reset width
+              </button>
+            )}
             <button
-              className="btn-secondary ml-auto"
-              onClick={p.onResetLayoutWidth}
-              title="Reset layout width to default"
+              className="btn-secondary"
+              onClick={p.onIceboxUncommitted}
+              disabled={p.uncommittedCount === 0}
+              title="Move all features still in Reviewing status to Icebox"
             >
-              Reset width
+              Icebox Uncommitted ({p.uncommittedCount})
             </button>
-          )}
-          <button
-            className={`btn-secondary ${p.layoutWidthChanged ? '' : 'ml-auto'}`}
-            onClick={p.onIceboxUncommitted}
-            disabled={p.uncommittedCount === 0}
-            title="Move all features still in Reviewing status to Icebox"
-          >
-            Icebox Uncommitted ({p.uncommittedCount})
-          </button>
+          </div>
           <div className="flex-1 min-w-[200px] max-w-md">
             <input
               className="input"

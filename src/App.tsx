@@ -269,7 +269,7 @@ export default function App() {
           aria-orientation="vertical"
           aria-label="Resize layout width"
           title="Drag to resize layout. Double-click to reset."
-          className="absolute right-0 top-0 z-[5] h-full w-2 cursor-col-resize touch-none select-none bg-transparent hover:bg-primary-300"
+          className="absolute right-0 top-0 z-[5] h-full w-2 cursor-col-resize touch-none select-none bg-transparent hover:bg-primary-300 dark:hover:bg-slate-600"
         />
       </div>
       {showAdd && (
