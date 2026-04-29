@@ -77,6 +77,7 @@ export const TopBar = (p: Props) => {
             <KpiScorecard
               label="Uncommitted"
               value={String(p.uncommittedCount)}
+              emoji="💭"
               bgClass="bg-white dark:bg-slate-800"
             />
             <KpiScorecard
@@ -88,6 +89,7 @@ export const TopBar = (p: Props) => {
             <KpiScorecard
               label="Committed"
               value={String(p.committedCount)}
+              emoji="🎯"
               bgClass="bg-[#E8FDEF] dark:bg-[#1d3a26]"
             />
           </div>
