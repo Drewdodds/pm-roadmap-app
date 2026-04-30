@@ -19,6 +19,8 @@ import {
   saveLayoutWidth,
 } from './storage';
 import { sampleFeatures } from './sampleData';
+import { fetchHopperPages, mergeHopperRows } from './lib/notionSync';
+import type { SyncStatus } from './components/SyncFromHopperCard';
 
 type SourceFilter = 'All' | 'hopper' | 'feature' | 'manual';
 type FollowUpFilter = 'All' | 'NeedsFollowUp' | 'Ready';
@@ -39,6 +41,7 @@ export default function App() {
   const [showAddStrategy, setShowAddStrategy] = useState(false);
   const [showAddOst, setShowAddOst] = useState(false);
   const [layoutWidth, setLayoutWidth] = useState<number>(loadLayoutWidth);
+  const [syncStatus, setSyncStatus] = useState<SyncStatus>({ kind: 'idle' });
   const [viewportWidth, setViewportWidth] = useState<number>(() =>
     typeof window !== 'undefined' ? window.innerWidth : DEFAULT_LAYOUT_WIDTH,
   );
@@ -201,6 +204,26 @@ export default function App() {
     setFeatures([]);
   };
 
+  const handleSyncFromHopper = async () => {
+    setSyncStatus({ kind: 'loading' });
+    try {
+      const rows = await fetchHopperPages();
+      const result = mergeHopperRows(features, rows);
+      setFeatures(result.merged);
+      setSyncStatus({
+        kind: 'success',
+        total: result.total,
+        added: result.added,
+        skipped: result.skipped,
+      });
+    } catch (err) {
+      setSyncStatus({
+        kind: 'error',
+        message: err instanceof Error ? err.message : String(err),
+      });
+    }
+  };
+
   return (
     <div className="min-h-screen">
       <TopBar
@@ -229,6 +252,8 @@ export default function App() {
         layoutWidth={effectiveLayoutWidth}
         layoutWidthChanged={layoutWidthChanged}
         onResetLayoutWidth={resetLayoutWidth}
+        syncStatus={syncStatus}
+        onSyncFromHopper={handleSyncFromHopper}
       />
       <div
         className="relative mx-auto px-6 py-6"
