@@ -88,19 +88,19 @@ export const TopBar = (p: Props) => {
             <KpiScorecard
               label="Uncommitted"
               value={String(p.uncommittedCount)}
-              emoji="💭"
+              iconSrc="/loading.png"
               bgClass="bg-white dark:bg-slate-800"
             />
             <KpiScorecard
               label="Iceboxed"
               value={String(p.iceboxCount)}
-              emoji="🧊"
+              iconSrc="/ice-bucket.png"
               bgClass="bg-[#BEF1F9] dark:bg-[#1e3a3f]"
             />
             <KpiScorecard
               label="Committed"
               value={String(p.committedCount)}
-              emoji="🎯"
+              iconSrc="/check.png"
               bgClass="bg-[#E8FDEF] dark:bg-[#1d3a26]"
             />
           </div>
@@ -153,15 +153,15 @@ export const TopBar = (p: Props) => {
             <button
               type="button"
               onClick={p.onAdd}
-              className="flex w-[180px] flex-col justify-center rounded-lg border-2 border-black bg-primary-500 px-3 py-2 text-left transition hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-primary-500 dark:border-slate-600"
+              className="flex w-[180px] flex-col justify-center rounded-lg border-2 border-black bg-slate-50 px-3 py-2 text-left transition hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-primary-500 dark:border-slate-600 dark:bg-slate-800 dark:hover:bg-slate-700"
             >
               <div className="flex min-h-[1.5rem] items-center justify-between gap-2">
-                <span className="text-[11px] font-semibold uppercase tracking-wide text-white">
+                <span className="text-[11px] font-semibold uppercase tracking-wide text-primary-900 dark:text-slate-100">
                   Add feature
                 </span>
                 <span className="text-2xl leading-none">➕</span>
               </div>
-              <span className="mt-0.5 text-[11px] text-white/80">Create manually</span>
+              <span className="mt-0.5 text-[11px] text-primary-300 dark:text-slate-400">Create manually</span>
             </button>
             <SyncFromHopperCard
               status={p.syncStatus}
