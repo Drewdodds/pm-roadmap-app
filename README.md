@@ -2,8 +2,8 @@
 
 Local-only prototype that helps Drew (PM for Application + Profiles at RudderStack)
 score and sequence features pulled from Notion without the noise of the production
-Notion databases. Scoring stays here; final calls are tagged back into Notion (today
-by hand; Sync To Hopper write-back is planned).
+Notion databases. Scoring stays here; final calls (Committed / Icebox) are written
+back to the Hopper via the in-app **Sync To Hopper** button.
 
 ## Vision / use case
 
@@ -27,8 +27,9 @@ The workflow:
 2. Flag anything that needs follow-up before scoring.
 3. Score each feature on 7 strategic booleans + an ARR decimal.
 4. Decide: leave in Reviewing, mark **Committed**, or **Icebox**.
-5. Tag back to Notion (manual today; in-app **Sync To Hopper** is the next
-   feature on the roadmap).
+5. Tag back to Notion via the **Sync To Hopper** button — pushes Committed /
+   Icebox decisions to Hopper rows and creates Feature DB entries for newly
+   committed items.
 
 ## Schema (app-side)
 
@@ -155,11 +156,13 @@ pm-roadmap-app/
 │   ├── storage.ts                      # localStorage + JSON/CSV import/export
 │   ├── sampleData.ts                   # "Load sample" seed
 │   ├── lib/
-│   │   └── notionSync.ts               # Hopper API client + mergeHopperRows
+│   │   ├── notionSync.ts               # Hopper pull client + mergeHopperRows
+│   │   └── notionSyncToHopper.ts       # Hopper write-back client
 │   └── components/
 │       ├── TopBar.tsx                  # KPI cards, sync card, filters, action buttons
 │       ├── KpiScorecard.tsx            # Uncommitted / Iceboxed / Committed display tiles
-│       ├── SyncFromHopperCard.tsx      # idle/loading/success/error sync card
+│       ├── SyncFromHopperCard.tsx      # idle/loading/success/error pull card
+│       ├── SyncToHopperCard.tsx        # idle/loading/success/error push card
 │       ├── FeatureTable.tsx            # main scoring grid (sort, resize, inline-edit)
 │       ├── ContextCard.tsx             # left-sidebar list (Strategies / OSTs)
 │       ├── ContextItemModal.tsx        # add-strategy / add-OST modal
@@ -187,16 +190,23 @@ utilities), driven by `pm-roadmap-app:theme:v1` in localStorage.
 ### Top bar
 
 - **Title block** — "Roadmap Scorer" + subtitle showing filtered count and total ARR.
-- **KPI scorecards** (display-only, not buttons):
-  - **Uncommitted** 💭 — count of features with `planningStatus === null`
-  - **Iceboxed** 🧊 — count of features with `planningStatus === 'icebox'`
-  - **Committed** 🎯 — count of features with `planningStatus === 'committed'`
-- **Sync from Hopper** card 📥 (slate background) — the in-app sync button.
-  Same visual size/border as the KPI cards but interactive. Four states:
+- **KPI scorecards** (display-only, not buttons; icons are PNGs in `public/`):
+  - **Uncommitted** (`loading.png`) — count of features with `planningStatus === null`
+  - **Iceboxed** (`ice-bucket.png`) — count of features with `planningStatus === 'icebox'`
+  - **Committed** (`check.png`) — count of features with `planningStatus === 'committed'`
+- **Sync From Hopper** card (soft indigo background, `loop.png` icon) — pulls
+  new Hopper rows into the app. Four states:
   - **idle** — "Pull new records"
   - **loading** — animated spinner on the right; "Syncing…"
-  - **success** — `N new · N existing · N returned`
+  - **success** — `N new · N updated · N returned`
   - **error** — red text with the API status message; tooltip shows full error
+- **Sync To Hopper** card (soft green background, `sync.png` icon) — writes
+  planning decisions back to Notion. Four states:
+  - **idle** — "Push decisions to Notion"
+  - **loading** — spinner; "Syncing…"
+  - **success** — `N created · N committed · N iceboxed` (tooltip shows full
+    breakdown including skipped rows)
+  - **error** — red text with the API status message
 - **Action buttons** (right side of header row):
   - **Load sample** — replaces board with synthetic data (no confirm; tooltip warns)
   - **Clear board** — drops all front-end records (no Notion writeback; tooltip warns)
@@ -364,9 +374,6 @@ the button will surface a clear error.
 
 ## Roadmap / what's next
 
-- **Sync To Hopper** (write-back) — push planning-status, follow-up flags, and
-  scoring decisions back to Hopper rows. Same Vite proxy; needs the
-  integration's **Update content** capability (already requested above).
 - **Hopper ARR auto-merge** — fold the CSV step (`merge-hopper-arr.mjs`) into
   the in-app sync, so ARR comes down with the rest of the row.
 - **Feature DB sync via the proxy** — replace the MCP loop with an in-app
@@ -383,7 +390,6 @@ the button will surface a clear error.
 - **Workspace admin gate** — some Notion plans restrict integration creation to admins; you may need to ask the rudderstacks owner to create the integration on your behalf.
 - **Feature DB still goes through the legacy MCP path** — see roadmap.
 - **Hopper ARR backfill is still manual** via a CSV + `merge-hopper-arr.mjs`.
-- **No writeback to Notion yet** (Sync To Hopper is the next button).
 
 ## Files worth reading first if you're Claude in a future session
 
@@ -398,6 +404,22 @@ the button will surface a clear error.
 9. `scripts/merge-hopper-arr.mjs` — Hopper ARR CSV merger.
 
 ## Changelog
+
+### May 2026 (later)
+
+- **Sync To Hopper button** (`src/lib/notionSyncToHopper.ts`,
+  `src/components/SyncToHopperCard.tsx`) — write-back of planning decisions to
+  the Hopper. Pushes Committed / Icebox status to Hopper rows and creates
+  Feature DB entries for newly committed items. Skips rows still in Reviewing
+  and rows already promoted to the Feature DB; the success line surfaces the
+  counts and the tooltip shows the full breakdown.
+- **Icon refresh** — KPI scorecards and the sync cards now use PNG assets in
+  `public/` (`loading.png`, `ice-bucket.png`, `check.png`, `loop.png`,
+  `sync.png`) instead of emoji. `KpiScorecard` gained an `iconSrc` prop.
+- **Sync card colors** — Sync From Hopper uses a soft indigo background; Sync
+  To Hopper uses a soft green ("green light") background. Add Feature button
+  shifted from primary blue to the same slate background as the other action
+  cards.
 
 ### May 2026
 
