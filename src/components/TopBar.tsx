@@ -1,6 +1,10 @@
 import type { AoR } from '../types';
 import { KpiScorecard } from './KpiScorecard';
 import { SyncFromHopperCard, type SyncStatus } from './SyncFromHopperCard';
+import {
+  SyncToHopperCard,
+  type SyncToHopperStatus,
+} from './SyncToHopperCard';
 import { ThemeToggle } from './ThemeToggle';
 
 const SHOW_IO_BUTTONS = false;
@@ -33,6 +37,8 @@ interface Props {
   onResetLayoutWidth: () => void;
   syncStatus: SyncStatus;
   onSyncFromHopper: () => void;
+  syncToHopperStatus: SyncToHopperStatus;
+  onSyncToHopper: () => void;
 }
 
 const Seg = <T extends string>({
@@ -129,7 +135,7 @@ export const TopBar = (p: Props) => {
               </button>
             </div>
           )}
-          <div className="ml-auto flex items-center gap-2">
+          <div className="ml-auto flex items-center gap-3">
             <button
               className="btn-secondary"
               onClick={p.onLoadSample}
@@ -144,12 +150,6 @@ export const TopBar = (p: Props) => {
             >
               Clear board
             </button>
-          </div>
-          <div className="flex items-center gap-3">
-            <SyncFromHopperCard
-              status={p.syncStatus}
-              onClick={p.onSyncFromHopper}
-            />
             <button
               type="button"
               onClick={p.onAdd}
@@ -163,6 +163,14 @@ export const TopBar = (p: Props) => {
               </div>
               <span className="mt-0.5 text-[11px] text-white/80">Create manually</span>
             </button>
+            <SyncFromHopperCard
+              status={p.syncStatus}
+              onClick={p.onSyncFromHopper}
+            />
+            <SyncToHopperCard
+              status={p.syncToHopperStatus}
+              onClick={p.onSyncToHopper}
+            />
           </div>
         </div>
 

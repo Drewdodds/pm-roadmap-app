@@ -23,7 +23,13 @@ import {
 } from './storage';
 import { sampleFeatures } from './sampleData';
 import { syncFromHopper } from './lib/notionSync';
+import {
+  describePlan,
+  executeSyncToHopper,
+  planSyncToHopper,
+} from './lib/notionSyncToHopper';
 import type { SyncStatus } from './components/SyncFromHopperCard';
+import type { SyncToHopperStatus } from './components/SyncToHopperCard';
 
 type SourceFilter = 'All' | 'hopper' | 'feature' | 'manual';
 type FollowUpFilter = 'All' | 'NeedsFollowUp' | 'Ready';
@@ -49,6 +55,9 @@ export default function App() {
   const [showAddOst, setShowAddOst] = useState(false);
   const [layoutWidth, setLayoutWidth] = useState<number>(loadLayoutWidth);
   const [syncStatus, setSyncStatus] = useState<SyncStatus>({ kind: 'idle' });
+  const [syncToHopperStatus, setSyncToHopperStatus] = useState<SyncToHopperStatus>(
+    { kind: 'idle' },
+  );
   const [viewportWidth, setViewportWidth] = useState<number>(() =>
     typeof window !== 'undefined' ? window.innerWidth : DEFAULT_LAYOUT_WIDTH,
   );
@@ -215,6 +224,39 @@ export default function App() {
     setFeatures([]);
   };
 
+  const handleSyncToHopper = async () => {
+    const plan = planSyncToHopper(features);
+    if (!confirm(describePlan(plan))) {
+      setSyncToHopperStatus({ kind: 'idle' });
+      return;
+    }
+    setSyncToHopperStatus({ kind: 'loading' });
+    try {
+      const result = await executeSyncToHopper(features, plan);
+      setFeatures(result.features);
+      if (result.errors.length > 0) {
+        setSyncToHopperStatus({
+          kind: 'error',
+          message: result.errors[0],
+        });
+        return;
+      }
+      setSyncToHopperStatus({
+        kind: 'success',
+        created: result.created,
+        committed: result.committed,
+        iceboxed: result.iceboxed,
+        reviewingSkipped: result.reviewingSkipped,
+        alreadyInFeatureDb: result.alreadyInFeatureDb,
+      });
+    } catch (err) {
+      setSyncToHopperStatus({
+        kind: 'error',
+        message: err instanceof Error ? err.message : String(err),
+      });
+    }
+  };
+
   const handleSyncFromHopper = async () => {
     setSyncStatus({ kind: 'loading' });
     try {
@@ -267,6 +309,8 @@ export default function App() {
         onResetLayoutWidth={resetLayoutWidth}
         syncStatus={syncStatus}
         onSyncFromHopper={handleSyncFromHopper}
+        syncToHopperStatus={syncToHopperStatus}
+        onSyncToHopper={handleSyncToHopper}
       />
       <div
         className="relative mx-auto px-6 py-6"
