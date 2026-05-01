@@ -2295,5 +2295,37 @@
       "increase_arr": false
     },
     "source": "hopper"
+  },
+  {
+    "id": "1083cbf0-4b17-4132-a6d2-d16f415d57aa",
+    "name": "Auth Improvements",
+    "aor": "Application",
+    "arr": 0,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "feature",
+    "notionUrl": "https://www.notion.so/2c0f2b415dd080fc8319da906f8437b5"
+  },
+  {
+    "id": "2a19e091-66e3-4eea-b253-25b624ad93d8",
+    "name": "Tracking plan composability: Reusable maintainable dictionary of Tracking plan event schemas",
+    "aor": "Application",
+    "arr": 0,
+    "scores": {
+      "is_apart_of_company_strategy": false,
+      "attached_to_company_ost": false,
+      "minimize_churn": false,
+      "operationally_critical": false,
+      "customer_ask": false,
+      "increase_arr": false
+    },
+    "source": "feature",
+    "notionUrl": "https://www.notion.so/311f2b415dd0802f94c4e58ad9a453e6"
   }
 ]

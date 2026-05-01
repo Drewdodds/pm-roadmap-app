@@ -1,6 +1,9 @@
 import type { AoR } from '../types';
 import { KpiScorecard } from './KpiScorecard';
+import { SyncFromHopperCard, type SyncStatus } from './SyncFromHopperCard';
 import { ThemeToggle } from './ThemeToggle';
+
+const SHOW_IO_BUTTONS = false;
 
 interface Props {
   aorFilter: AoR | 'All';
@@ -28,6 +31,8 @@ interface Props {
   layoutWidth: number;
   layoutWidthChanged: boolean;
   onResetLayoutWidth: () => void;
+  syncStatus: SyncStatus;
+  onSyncFromHopper: () => void;
 }
 
 const Seg = <T extends string>({
@@ -93,6 +98,37 @@ export const TopBar = (p: Props) => {
               bgClass="bg-[#E8FDEF] dark:bg-[#1d3a26]"
             />
           </div>
+          <input
+            ref={importRef}
+            type="file"
+            accept="application/json"
+            className="hidden"
+            onChange={(e) => {
+              const f = e.target.files?.[0];
+              if (f) p.onImportJson(f);
+              e.target.value = '';
+            }}
+          />
+          {SHOW_IO_BUTTONS && (
+            <div className="flex items-center gap-2">
+              <button
+                className="btn-secondary"
+                onClick={() =>
+                  (
+                    window as unknown as { _importInput: HTMLInputElement }
+                  )._importInput?.click()
+                }
+              >
+                Import JSON
+              </button>
+              <button className="btn-secondary" onClick={p.onExportJson}>
+                Export JSON
+              </button>
+              <button className="btn-secondary" onClick={p.onExportCsv}>
+                Export CSV
+              </button>
+            </div>
+          )}
           <div className="ml-auto flex items-center gap-2">
             <button
               className="btn-secondary"
@@ -108,35 +144,24 @@ export const TopBar = (p: Props) => {
             >
               Clear board
             </button>
-            <input
-              ref={importRef}
-              type="file"
-              accept="application/json"
-              className="hidden"
-              onChange={(e) => {
-                const f = e.target.files?.[0];
-                if (f) p.onImportJson(f);
-                e.target.value = '';
-              }}
+          </div>
+          <div className="flex items-center gap-3">
+            <SyncFromHopperCard
+              status={p.syncStatus}
+              onClick={p.onSyncFromHopper}
             />
             <button
-              className="btn-secondary"
-              onClick={() =>
-                (
-                  window as unknown as { _importInput: HTMLInputElement }
-                )._importInput?.click()
-              }
+              type="button"
+              onClick={p.onAdd}
+              className="flex w-[180px] flex-col justify-center rounded-lg border-2 border-black bg-primary-500 px-3 py-2 text-left transition hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-primary-500 dark:border-slate-600"
             >
-              Import JSON
-            </button>
-            <button className="btn-secondary" onClick={p.onExportJson}>
-              Export JSON
-            </button>
-            <button className="btn-secondary" onClick={p.onExportCsv}>
-              Export CSV
-            </button>
-            <button className="btn-primary" onClick={p.onAdd}>
-              + Add feature
+              <div className="flex min-h-[1.5rem] items-center justify-between gap-2">
+                <span className="text-[11px] font-semibold uppercase tracking-wide text-white">
+                  Add feature
+                </span>
+                <span className="text-2xl leading-none">➕</span>
+              </div>
+              <span className="mt-0.5 text-[11px] text-white/80">Create manually</span>
             </button>
           </div>
         </div>
