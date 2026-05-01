@@ -2,7 +2,8 @@
 
 Local-only prototype that helps Drew (PM for Application + Profiles at RudderStack)
 score and sequence features pulled from Notion without the noise of the production
-Notion databases. Scoring stays here; final calls are tagged back into Notion by hand.
+Notion databases. Scoring stays here; final calls are tagged back into Notion (today
+by hand; Sync To Hopper write-back is planned).
 
 ## Vision / use case
 
@@ -16,227 +17,338 @@ Drew's day-to-day lives in two Notion databases:
 When inheriting a set of AoRs (currently **Application** and **Profiles**), mid-process
 orientation is hard: both DBs carry hundreds of records and dozens of columns
 owned by multiple PMs, engineers, and stages. This app pulls only Drew-assigned
-records, strips the noise, and gives a single surface for comparative scoring.
+records, strips the noise, and gives a single surface for comparative scoring,
+follow-up tracking, and committed-vs-iceboxed decisioning.
 
 The workflow:
 
-1. Sync Drew-assigned records from Notion into the app (manual, ad-hoc).
-2. Score each feature on 7 strategic booleans + an ARR decimal.
-3. Sort/filter to decide what to build and when.
-4. Tag back to Notion manually (this app **does not write to Notion**).
+1. Sync Drew-assigned records from Notion into the app (one-click for Hopper;
+   MCP-assisted for Feature DB + ARR — see below).
+2. Flag anything that needs follow-up before scoring.
+3. Score each feature on 7 strategic booleans + an ARR decimal.
+4. Decide: leave in Reviewing, mark **Committed**, or **Icebox**.
+5. Tag back to Notion (manual today; in-app **Sync To Hopper** is the next
+   feature on the roadmap).
 
 ## Schema (app-side)
 
 This app **does not mirror** the Notion schemas. Those are the source of noise
-we're escaping. In-app schema:
+we're escaping. In-app schema (`src/types.ts`):
 
 | Field | Type | Notes |
 |---|---|---|
-| `name` | string | Feature title (from Notion title; editable) |
-| `aor` | enum \| null | `Application` or `Profiles`; best-guess on import, user-editable |
-| `scores.is_apart_of_company_strategy` | boolean | Aligned to a company-level strategic bet (UI: "Strategy") |
-| `scores.attached_to_company_ost` | boolean | Linked to a company OST objective (UI: "OST") |
-| `scores.minimize_churn` | boolean | Prevents/reduces churn (UI: "Churn Prevention") |
-| `scores.operationally_critical` | boolean | Required to keep operations running (UI: "Ops Critical") |
-| `scores.customer_ask` | boolean | Explicit customer request on file (UI: "Customer Ask") |
-| `scores.increase_arr` | boolean | Opens/expands ARR (UI: "ARR Driver") |
-| `scores.competitor_parity` | boolean | Parity feature needed to not lose deals (UI: "Competitor Parity") |
-| `arr` | number | $ ARR attached to the feature (populated via Notion Customer rollup for Feature DB; via user-provided CSV for Hopper) |
-| `source` | enum | `hopper` \| `feature` \| `manual` |
-| `notionUrl` | string? | Link back to the Notion record |
 | `id` | uuid | Stable app-side id |
+| `name` | string | Feature title (from Notion title; editable) |
+| `aor` | `'Application' \| 'Profiles' \| null` | Best-guess on import, user-editable |
+| `arr` | number | $ ARR attached to the feature (Hopper backfill via `scripts/merge-hopper-arr.mjs`; Feature DB via MCP customer-rollup reconstruction) |
+| `scores.is_apart_of_company_strategy` | boolean | UI: "Strategy" |
+| `scores.attached_to_company_ost` | boolean | UI: "OST" |
+| `scores.minimize_churn` | boolean | UI: "Churn Prevention" |
+| `scores.operationally_critical` | boolean | UI: "Ops Critical" |
+| `scores.customer_ask` | boolean | UI: "Customer Ask" |
+| `scores.increase_arr` | boolean | UI: "ARR Driver" |
+| `scores.competitor_parity` | boolean | UI: "Competitor Parity" |
+| `needsFollowUp` | boolean | Item needs PM follow-up before scoring |
+| `followUpNote` | string? | Free-text "why?" attached to the follow-up flag |
+| `planningStatus` | `'committed' \| 'icebox' \| null` | `null` = Reviewing. Drives KPI scorecards, Status filter, and row dimming. |
+| `source` | `'hopper' \| 'feature' \| 'manual'` | Where the row came from |
+| `notionUrl` | string? | Link back to the Notion record; also the dedup key on Sync From Hopper |
 
 **Computed:** `Score` = sum of the 7 booleans (0–7).
 
 **Default sort:** Score descending, ARR descending tiebreak. Click any of the
-**Score** or **ARR** column headers in the UI to switch sort key or toggle
+**#**, **Score**, or **ARR** column headers to switch sort key or toggle
 asc/desc. The active column shows a filled arrow; clicking the same column
 again flips direction.
 
 ## Architecture
 
+There are now **two paths** to get data in. The Hopper path is fully in-app;
+Feature DB + ARR rollup reconstruction still goes through the MCP-assisted
+flow because those Notion shapes are messier and we haven't rebuilt them yet.
+
+### Primary: Sync From Hopper (in-app, one click)
+
 ```
-┌───────────────────────────────────────────────────────────────────┐
-│  Notion workspace                                                  │
-│  ├── The Hopper DB         (Area PM = Drew — "Assigned to Me" view)│
-│  ├── Feature Pipeline DB   (PM Owner = Drew — many views)          │
-│  └── Current Customers DB  (ARR per customer, related to Feature)  │
-└────────────────────┬──────────────────────────────────────────────┘
+┌────────────────────────────────────────────────────────────────┐
+│  Browser (App.tsx → SyncFromHopperCard)                        │
+│    fetch('/api/notion/v1/databases/<id>/query', POST)          │
+└──────────────────────────┬─────────────────────────────────────┘
+                           │  no Authorization header at this hop
+                           ▼
+┌────────────────────────────────────────────────────────────────┐
+│  Vite dev server proxy  (vite.config.ts → server.proxy)        │
+│    rewrites /api/notion → https://api.notion.com               │
+│    injects Authorization: Bearer ${NOTION_TOKEN}               │
+│    injects Notion-Version: 2022-06-28                          │
+└──────────────────────────┬─────────────────────────────────────┘
+                           ▼
+┌────────────────────────────────────────────────────────────────┐
+│  Notion REST API (api.notion.com)                              │
+│    server-side filter: Area PM = Drew                          │
+│                        AND Hopper Stages NOT IN {Icebox,       │
+│                        Duplicate, To Feature DB}               │
+│    cursor pagination until has_more = false                    │
+└──────────────────────────┬─────────────────────────────────────┘
+                           │  full result set
+                           ▼
+┌────────────────────────────────────────────────────────────────┐
+│  src/lib/notionSync.ts → mergeHopperRows()                     │
+│    dedup by notionUrl                                          │
+│    new rows: scores all false, arr=0, status=null, AoR guess   │
+│    existing rows: untouched (no overwrite)                     │
+│    prepend new rows to features[]                              │
+└──────────────────────────┬─────────────────────────────────────┘
+                           ▼
+┌────────────────────────────────────────────────────────────────┐
+│  Browser localStorage (auto-saves on every change)             │
+│    pm-roadmap-app:features:v1     → Feature[]                  │
+│    pm-roadmap-app:strategies:v1   → ContextItem[] (left bar)   │
+│    pm-roadmap-app:osts:v1         → ContextItem[] (left bar)   │
+│    pm-roadmap-app:layoutWidth:v1  → number (page max-width)    │
+│    pm-roadmap-app:nameColWidth:v1 → number (Feature col width) │
+│    pm-roadmap-app:theme:v1        → 'light' | 'dark'           │
+└────────────────────────────────────────────────────────────────┘
+```
+
+The token lives only in `.env.local` (gitignored via the existing `*.local`
+rule). It's read by `loadEnv` in `vite.config.ts`, which runs in Node — never
+in the browser bundle. Verify with `grep -r "secret_" dist/` after a build.
+
+### Legacy: Feature DB + ARR (MCP-assisted)
+
+```
+┌──────────────────────────────────────────────────────────────────┐
+│  Notion workspace                                                 │
+│  ├── Feature Pipeline DB   (PM Owner = Drew — many views)         │
+│  └── Current Customers DB  (ARR per customer, related to Feature) │
+└────────────────────┬─────────────────────────────────────────────┘
                      │ Claude queries via Notion MCP
                      ▼
-┌───────────────────────────────────────────────────────────────────┐
-│  Tool-result files (ephemeral, in Claude's tmp dir)                │
-│  └── Raw JSON arrays of up to 100 records per call                 │
-└────────────────────┬──────────────────────────────────────────────┘
-                     │ scripts/build-seed.mjs + customer ARR merge
+┌──────────────────────────────────────────────────────────────────┐
+│  Tool-result files (ephemeral, in Claude's tmp dir)               │
+└────────────────────┬─────────────────────────────────────────────┘
+                     │ scripts/build-seed.mjs (+ ARR reconstruction)
                      ▼
-┌───────────────────────────────────────────────────────────────────┐
-│  data/seed.json                                                    │
-│  └── Normalized Feature[] per app schema                           │
-└────────────────────┬──────────────────────────────────────────────┘
-                     │ User clicks "Import JSON" in UI
-                     ▼
-┌───────────────────────────────────────────────────────────────────┐
-│  Browser localStorage                                              │
-│  ├── key `pm-roadmap-app:features:v1`     → feature set + scoring  │
-│  └── key `pm-roadmap-app:nameColWidth:v1` → resizable name-col size│
-│      Auto-saves on every change.                                   │
-└───────────────────────────────────────────────────────────────────┘
+┌──────────────────────────────────────────────────────────────────┐
+│  data/seed.json  → click "Import JSON" in UI (replaces state)     │
+└──────────────────────────────────────────────────────────────────┘
 ```
 
-**Stack:** Vite + React + TypeScript + Tailwind v3. No backend. No auth.
-Persistence is browser `localStorage` only, with JSON import/export as a
-manual safety valve.
+This path is still the only way to get **Feature DB rows** and to reconstruct
+the **Combined ARR rollup** (the MCP omits rollup values, so we fetch related
+customer pages and sum). Hopper rows should now come via the in-app button —
+the MCP Hopper steps are documented below for reference but are no longer the
+recommended flow.
 
-**Project layout:**
+**Stack:** Vite + React + TypeScript + Tailwind v3. No backend in the production
+sense — the Vite dev server doubles as the Notion proxy. Persistence is browser
+`localStorage`, with JSON import/export as a manual safety valve.
+
+### Project layout
 
 ```
 pm-roadmap-app/
 ├── src/
-│   ├── App.tsx               # top-level state, filters, CRUD handlers
-│   ├── types.ts              # schema + SCORING_KEYS + computeScore()
-│   ├── storage.ts            # localStorage + JSON/CSV import/export
-│   ├── sampleData.ts         # "Load sample" seed (5 synthetic rows)
+│   ├── App.tsx                         # top-level state, filters, sidebar wiring
+│   ├── types.ts                        # Feature, Scores, PlanningStatus, ContextItem, SCORING_KEYS
+│   ├── storage.ts                      # localStorage + JSON/CSV import/export
+│   ├── sampleData.ts                   # "Load sample" seed
+│   ├── lib/
+│   │   └── notionSync.ts               # Hopper API client + mergeHopperRows
 │   └── components/
-│       ├── TopBar.tsx        # AoR/source filters, search, action buttons
-│       ├── FeatureTable.tsx  # main scoring grid (sort, resize, edit)
-│       └── AddFeatureModal.tsx
+│       ├── TopBar.tsx                  # KPI cards, sync card, filters, action buttons
+│       ├── KpiScorecard.tsx            # Uncommitted / Iceboxed / Committed display tiles
+│       ├── SyncFromHopperCard.tsx      # idle/loading/success/error sync card
+│       ├── FeatureTable.tsx            # main scoring grid (sort, resize, inline-edit)
+│       ├── ContextCard.tsx             # left-sidebar list (Strategies / OSTs)
+│       ├── ContextItemModal.tsx        # add-strategy / add-OST modal
+│       ├── AddFeatureModal.tsx         # manual feature creation
+│       └── ThemeToggle.tsx             # dark/light toggle
 ├── scripts/
-│   └── build-seed.mjs        # Notion tool-result → data/seed.json
+│   ├── build-seed.mjs                  # legacy: Notion MCP tool-result → data/seed.json
+│   └── merge-hopper-arr.mjs            # merge user-provided ARR CSV into seed.json
 ├── data/
-│   └── seed.json             # last sync output (do not commit if sensitive)
-└── tailwind.config.js        # RudderStack palette + Inter fallback
+│   └── seed.json                       # last MCP sync output (do not commit if sensitive)
+├── public/
+│   └── favicon.svg
+├── .env.local.example                  # template for NOTION_TOKEN + VITE_NOTION_HOPPER_DB_ID
+├── vite.config.ts                      # /api/notion proxy with token injection
+└── tailwind.config.js                  # RudderStack palette + Inter fallback
 ```
 
 **Styling:** RudderStack palette pulled from the visual style guide
 (Primary-50 → Primary-900, accent colors). PolySans isn't freely licensed, so
-headings fall back to Inter — tweak `tailwind.config.js` if PolySans gets
-licensed for this context.
+headings fall back to Inter. Dark mode is class-based (`dark:` Tailwind
+utilities), driven by `pm-roadmap-app:theme:v1` in localStorage.
 
 ## UI behaviors worth knowing
 
-- **Top bar**
-  - **Load sample** — immediately replaces the current board with synthetic
-    sample data. No confirm dialog; the button's tooltip warns ("Clear and
-    board and load sample data").
-  - **Clear board** — immediately drops all records from the front-end only.
-    No backend or Notion writeback. Tooltip warns; no confirm dialog.
-  - **Import JSON / Export JSON / Export CSV** — import replaces current
-    state (with a confirm prompt); exports are non-destructive.
-  - **AoR filter** — All / Application / Profiles.
-  - **Source filter** — All / Hopper / Feature DB / Manual.
-  - **Search** — substring match on feature name.
-- **Feature table**
-  - **Feature column** — default width 420px, drag the right edge of the
-    header to resize (min 180, max 900). Width is persisted to localStorage.
-  - **Sort** — click **Score** or **ARR** header to sort by that column.
-    Clicking the active column toggles between descending (default) and
-    ascending. Tiebreak is always the other numeric column, in the same
-    direction.
-  - **Inline edit** — name, AoR, ARR, and each boolean scoring checkbox are
-    all editable directly in the row.
-  - **Source chip** — color-coded: hopper=light purple, feature=blue,
-    manual=gray.
-  - **Score chip** — color-coded: 5+ green, 3–4 blue, 1–2 neutral, 0 muted.
-  - **Open in Notion** — each synced row has a small link under the name
-    that opens the original Notion page.
+### Top bar
 
-## Getting data in — the sync process
+- **Title block** — "Roadmap Scorer" + subtitle showing filtered count and total ARR.
+- **KPI scorecards** (display-only, not buttons):
+  - **Uncommitted** 💭 — count of features with `planningStatus === null`
+  - **Iceboxed** 🧊 — count of features with `planningStatus === 'icebox'`
+  - **Committed** 🎯 — count of features with `planningStatus === 'committed'`
+- **Sync from Hopper** card 📥 (slate background) — the in-app sync button.
+  Same visual size/border as the KPI cards but interactive. Four states:
+  - **idle** — "Pull new records"
+  - **loading** — animated spinner on the right; "Syncing…"
+  - **success** — `N new · N existing · N returned`
+  - **error** — red text with the API status message; tooltip shows full error
+- **Action buttons** (right side of header row):
+  - **Load sample** — replaces board with synthetic data (no confirm; tooltip warns)
+  - **Clear board** — drops all front-end records (no Notion writeback; tooltip warns)
+  - **Import JSON** / **Export JSON** / **Export CSV** — import replaces (with confirm); exports are non-destructive
+  - **+ Add feature** — manual row entry
+- **Filter row** (below):
+  - **AoR** — All / Application / Profiles
+  - **Follow-up** — All / Needs follow-up / Ready
+  - **Source** — All / Hopper / Feature DB / Manual
+  - **Status** — All / Reviewing / Committed / Icebox  (Reviewing = `planningStatus === null`)
+- **Right-side actions**:
+  - **Theme toggle** — dark/light, persisted
+  - **Reset width** — only appears when the page layout has been resized
+  - **Icebox Uncommitted (N)** — bulk-move every Reviewing row to Icebox (with confirm)
+- **Search** — substring match on feature name
 
-The Notion MCP runs inside Claude Code, **not** the browser. The app never
-sees a Notion token. Sync is a conversational loop you run with Claude.
+### Left sidebar (visible at `xl` breakpoint and up)
+
+Two stacked, sticky context cards meant to keep strategic context in view
+while you score:
+
+- **Company strategies** — freeform `{ title, description }` items. Add via "+ Add", delete per item.
+- **OSTs** — same shape, separate list (Objectives, Solutions, Tactics).
+
+Both lists persist independently in localStorage and never leave the browser.
+
+### Feature table — columns in render order
+
+1. **#** — row number (sortable)
+2. **Feature** — editable name; "open in Notion" link below if `notionUrl` present; column is resizable (drag the right edge of the header; min 180, max 900, default 420; persisted)
+3. **AoR** — dropdown: blank / Application / Profiles
+4. **Follow-up** — checkbox + inline "why?" note input (only the checkbox toggles `needsFollowUp`; the note edits `followUpNote`)
+5. **Strategy** / **OST** / **Churn Prevention** / **Ops Critical** / **Customer Ask** / **ARR Driver** / **Competitor Parity** — 7 scoring checkboxes
+6. **Score** — computed chip (sortable). Color: 5+ green, 3–4 blue, 1–2 neutral, 0 muted
+7. **ARR** — number input (sortable; tiebreak to Score in default sort)
+8. **Source** — chip (sortable). Color: hopper light-purple, feature blue, manual gray
+9. **Status** — dropdown: blank / Committed / Icebox. Iceboxed rows dim to ~60% opacity and brighten on hover.
+10. **✕** — delete
+
+### Page-level
+
+- **Layout width** — drag handle on the right edge of the page; double-click to reset; persisted in `pm-roadmap-app:layoutWidth:v1`. Default 2100, min 1280, capped to viewport width minus 48.
+- **No undo** — use **Export JSON** as a checkpoint before risky actions.
+
+## Getting data in — Sync From Hopper (primary)
+
+### One-time Notion setup
+
+1. **Create an internal integration** at https://www.notion.so/profile/integrations.
+   - Type: **Internal**
+   - Associated workspace: **rudderstacks**
+   - Capabilities: **Read content**, **Update content** (reserved for the upcoming Sync To Hopper button), **Read user information without email addresses**
+   - Some workspaces restrict integration creation to admins; if you see "You don't have permission to create integrations," ask the rudderstacks workspace owner to create it on your behalf and hand you the **Internal Integration Secret** via 1Password / Slack DM.
+2. **Connect the integration to the Hopper DB** in Notion: open the Hopper page → `···` → **Connections** → search for the integration → **"this page only"** scope. The integration cannot see anything else in rudderstacks unless explicitly connected.
+3. **Copy the env template and paste the secret**:
+   ```bash
+   cp .env.local.example .env.local
+   # then open .env.local and set NOTION_TOKEN=secret_...
+   ```
+4. **Restart `npm run dev`.** Vite reads `.env.local` only at startup; the proxy won't have the token until you restart.
+
+### Click the button
+
+Click **Sync From Hopper** in the top bar. The card shows a spinner on the
+right while the request runs, then updates to a result line:
+`N new · N existing · N returned`.
+
+- **Filter applied** (server-side, in the request body):
+  `Area PM contains <Drew's user ID>` AND `Hopper Stages` NOT IN
+  {`Icebox`, `Duplicate`, `To Feature DB`}.
+  Drew's user ID is hardcoded in `src/lib/notionSync.ts`; replace it if a
+  different PM uses the app.
+- **Pagination** — the real REST API exposes a `next_cursor`, so we loop until
+  `has_more = false`. No 100-record cap (unlike the MCP).
+- **Merge semantics** — dedup by `notionUrl`. Existing rows are never
+  overwritten — your scoring, AoR edits, follow-up notes, and planning status
+  are preserved. Only net-new rows are prepended.
+- **AoR best-guess on import** — `Product Area === Profiles` → `'Profiles'`,
+  else `'Application'`. User-editable in the table.
+- **Net-new rows always start fresh**: scores all `false`, `arr: 0`,
+  `needsFollowUp: false`, `planningStatus: null`. The point of the app is for
+  the PM to fill these in.
+
+### Security model
+
+- Token lives only in `.env.local` (gitignored via `*.local` in `.gitignore`).
+- `loadEnv` reads it in Node; the `proxyReq` handler on `vite.config.ts:server.proxy['/api/notion']` injects `Authorization: Bearer ${NOTION_TOKEN}` per request.
+- Browser → Vite is `localhost:5173` only. The browser bundle never sees the token.
+- Notion DB IDs (e.g. `VITE_NOTION_HOPPER_DB_ID`) are **not** sensitive on their own — auth is per-token, not per-URL — and are exposed to the client via `import.meta.env`.
+- Verify after a build: `grep -r "secret_" dist/` should return nothing.
+
+## Getting data in — Feature DB + ARR (legacy MCP path)
+
+Still required for **Feature DB rows** and for reconstructing the
+**Combined ARR rollup** that the MCP omits. Run this with Claude Code via the
+Notion connector.
 
 ### Prerequisites (one-time)
 
-- Notion connector is enabled in Claude Code.
-- You are authenticated as Drew Dodds (so the `Area PM = me` view filter works).
-- The Hopper "Assigned to Me" view has the following server-side filters
-  applied (so the 100-record cap isn't wasted on Icebox/Duplicate rows):
-  - `Area PM` contains `me`
-  - `Hopper Stages` is not `Icebox` and is not `Duplicate`
+- Notion connector enabled in Claude Code.
+- Authenticated as Drew Dodds (so `PM Owner = me` works).
 
 ### Every sync (conversational loop with Claude)
 
-Tell Claude something like:
+Tell Claude:
 
-> Sync Hopper + Feature DB for Drew. Feature DB stages: Validation & Research,
-> Product Refinement, Technical Refinement, Development.
+> Sync the Feature DB for Drew. Stages: Validation & Research, Product Refinement,
+> Technical Refinement, Development. Then reconstruct ARR from the Customer List
+> relations.
 
 Claude will:
 
-1. Resolve Drew's Notion user ID via `notion-search` (query_type=user).
-   Current value: `eac00464-c24f-4d39-ae97-5576db9bc9bb`.
-2. Query **Hopper** via its "Assigned to Me" view (all records returned are
-   Drew's; server-side filter already excludes Icebox/Duplicate).
-   URL: `https://www.notion.so/rudderstacks/270f2b415dd080c2bcf9f43a84ccfd52?v=2b0f2b415dd08059a3ea000c505dcd22`
-3. Query **Feature DB** via **multiple views** and union results by Notion URL.
+1. Resolve Drew's Notion user ID via `notion-search`. Current value:
+   `eac00464-c24f-4d39-ae97-5576db9bc9bb`.
+2. Query **Feature DB** via **multiple views** and union by Notion URL.
    Individual views don't filter by PM Owner server-side, and each view hits
-   the 100-record cap. Unioning 5 views (each sorted/grouped differently) is
-   how we reach Drew's full set. Views used in the last sync:
+   the 100-record cap; unioning views with different sorts is how we reach the
+   full set. Recently used views:
    - Drew's View: `?v=305f2b415dd080cbb1aa000c1e0559a4`
    - All Features: `?v=290f2b415dd080b98c04000cc79ad637`
-   - Prioritized Roadmap (or similar): `?v=2cbf2b415dd08082b3e1000c725653b9`
+   - Prioritized Roadmap: `?v=2cbf2b415dd08082b3e1000c725653b9`
    - Two more: `?v=2a3f2b415dd08030af6a000c05dfba67`, `?v=30df2b415dd080cc8442000c8cdb3151`
-4. Post-filter Feature DB rows client-side to keep only Drew's rows in the
-   four active Pipeline Stages (`4. Validation & Research`,
-   `6. Product Refinement`, `7. Technical Refinement`, `9. Development`).
-5. Run `node scripts/build-seed.mjs --hopper <h.txt> --feature <f1.txt> --feature <f2.txt> ...`
+3. Post-filter client-side to keep only Drew's rows in the four active stages
+   (`4. Validation & Research`, `6. Product Refinement`, `7. Technical Refinement`, `9. Development`).
+4. Run `node scripts/build-seed.mjs --feature <f1.txt> --feature <f2.txt> ...`
    to normalize and write `data/seed.json`.
-6. Print a summary: total records, by source, by AoR, plus the Feature DB item
-   list for spot-checking.
+5. For each Feature DB row, fetch its `Customer List` relation pages and sum
+   their `ARR` values. Patch `data/seed.json` with the reconstructed
+   `Combined ARR`.
+6. (Optional, Hopper ARR backfill) Hand Claude a `notion_url,arr` CSV; run
+   `node scripts/merge-hopper-arr.mjs` to patch ARR onto already-synced Hopper
+   rows in `data/seed.json` by `notionUrl`.
 
-Then for Feature DB ARR:
+Then in the browser: **Clear board** → **Import JSON** → pick `data/seed.json`.
 
-7. For each of the Drew Feature DB rows, pull its `Customer List` (relation
-   URLs to the Current Customers DB).
-8. Fetch each unique customer page (`notion-fetch`) — the customer page
-   exposes `ARR` as a literal number. Rollups aren't exposed, so we reconstruct
-   `Combined ARR` by summing customers per feature.
-9. Patch `data/seed.json` with the summed ARR per feature row.
+### Important caveats (MCP path only)
 
-Then for Hopper ARR (interim: manual CSV):
+- **100-record cap.** `notion-query-database-view` returns at most 100 records per call. No cursor exposed by the MCP. Workaround: union multiple views.
+- **Rollups are omitted.** Both `notion-query-database-view` and `notion-fetch` return rollup values as `"<omitted />"`. That's why we reconstruct `Combined ARR` from per-customer fetches.
+- **Import replaces** — wipes the in-app state. Use **Export JSON** first if you've already scored.
+- **AoR best-guess is a guess** — same `Profiles`-keyword heuristic; verify in the app and fix any misses before scoring.
+- **No writeback** to Notion (yet — see roadmap).
 
-10. You export the Hopper customer relations + Current Customers ARR from Notion,
-    join by account name in Excel/Sheets, produce a CSV with columns
-    `notion_url,arr`, save to `data/hopper_arr.csv`.
-11. Ask Claude to merge: Claude reads the CSV, matches rows in `seed.json` by
-    `notionUrl`, patches `arr` in place, reports rows matched vs skipped.
-
-Finally, in the browser:
-
-12. Open http://localhost:5173 → click **Clear board** → **Import JSON** →
-    pick `data/seed.json`. You now have the full scored-and-ARR'd board.
-
-### Important caveats
-
-- **100-record cap.** `notion-query-database-view` returns at most 100 records
-  per call. On the Hopper, the "Assigned to Me" view filters server-side to
-  Drew so all 100 are his; still capped if Drew has >100. On the Feature DB,
-  we union multiple views to reach all Drew-owned records.
-- **No pagination.** The MCP tool doesn't expose a cursor. The workaround is
-  multiple views with different sorts, unioned by Notion URL.
-- **Rollups are omitted.** Both `notion-query-database-view` and
-  `notion-fetch` return rollup values as `"<omitted />"`. That's why we can't
-  read `Combined ARR` directly and instead reconstruct it from Customer List
-  relations + per-customer ARR fetches.
-- **AoR best-guess is just a guess.** Import logic maps `Product Area=Profiles`
-  (Hopper) and `Initiative` / `Product Pillar` containing "Profiles" (Feature DB)
-  → Profiles; everything else → Application. Verify the AoR column in the app
-  and fix any misses before scoring.
-- **Import replaces.** Importing JSON wipes the current in-app state. Use
-  **Export JSON** first if you've scored and want a snapshot.
-- **No writeback.** Scoring lives in the app. Tagging `Planned For`,
-  `Target Quarter`, priority, etc. back onto Notion is manual (by design).
-
-### Filter logic (as currently implemented)
+## Filter logic (as currently implemented)
 
 | Source | Kept if | Dropped if |
 |---|---|---|
-| Hopper | `Area PM` contains Drew AND `Hopper Stages` NOT IN {`Icebox`, `Duplicate`} | Icebox, Duplicate |
-| Feature DB | `PM Owner` contains Drew AND `Pipeline Stage` IN {`4. Validation & Research`, `6. Product Refinement`, `7. Technical Refinement`, `9. Development`} | all other stages |
+| Hopper (in-app sync) | `Area PM` contains Drew AND `Hopper Stages` NOT IN {`Icebox`, `Duplicate`, `To Feature DB`} | All other stages |
+| Feature DB (MCP path) | `PM Owner` contains Drew AND `Pipeline Stage` IN {`4. Validation & Research`, `6. Product Refinement`, `7. Technical Refinement`, `9. Development`} | All other stages |
 
-These filters live in `scripts/build-seed.mjs` — edit `HOPPER_DROP_STAGES` and
-`FEATURE_KEEP_STAGES` to change scope.
+Hopper filters live in `src/lib/notionSync.ts` (`HOPPER_DROP_STAGES`).
+Feature DB filters live in `scripts/build-seed.mjs` (`FEATURE_KEEP_STAGES`).
 
 ## Running locally
 
@@ -246,63 +358,64 @@ npm run dev        # http://localhost:5173
 npm run build      # produces dist/
 ```
 
-## Session log (April 2026)
+The **Sync From Hopper** button requires `.env.local` to be populated and
+`npm run dev` to be running (the proxy is dev-server-only). Without those,
+the button will surface a clear error.
 
-What we built and changed during the initial session:
+## Roadmap / what's next
 
-- **Scaffolded** Vite + React + TS + Tailwind v3, palette from the RudderStack
-  Visual Style Guide (Primary-50 → Primary-900 + accent colors). Inter
-  fallback for headings (PolySans not free).
-- **Schema decided:** Feature Name (string), AoR (Application / Profiles),
-  6 booleans, ARR decimal, computed Score. Later added a 7th boolean
-  (Competitor Parity). Labels: Strategy / OST / Churn Prevention / Ops Critical /
-  Customer Ask / ARR Driver / Competitor Parity.
-- **Top bar** with AoR + Source filters, search, Load sample, Clear board,
-  Import JSON, Export JSON, Export CSV, Add feature.
-- **Sort:** originally had a Score×ARR composite sort toggle; dropped that in
-  favor of a single Score → ARR tiebreak sort; later made Score and ARR column
-  headers clickable for per-column sorting with asc/desc toggle.
-- **UX polish:** replaced `confirm()` popups with button tooltips for Load
-  sample and Clear board (direct action on click); promoted Clear board from
-  a subtle text link into a proper secondary button.
-- **Feature column resize:** default width 420px, pointer-drag handle on the
-  right edge (min 180, max 900), width persisted to localStorage.
-- **Notion sync plumbing**
-  - Discovered both DB schemas, identified `Area PM` (Hopper) and `PM Owner`
-    (Feature DB) as the PM field on each.
-  - Hit the 100-record-per-view cap; resolved by:
-    - Hopper: using "Assigned to Me" (filtered to Drew server-side) + asking
-      you to add `Hopper Stages != Icebox, Duplicate` to that view so the cap
-      isn't wasted on Icebox rows. Reached 100 kept.
-    - Feature DB: unioning 5 different views' first 100 records each by Notion
-      URL, then filtering client-side to Drew + 4 active stages. Reached all 22
-      expected records (16 Validation / 3 Product Refinement / 1 Technical
-      Refinement / 2 Development).
-- **ARR population**
-  - Feature DB: rollup (`Combined ARR`) is not exposed by the MCP. Reconstructed
-    by pulling `Customer List` URLs per feature, fetching each unique customer
-    page (24 uniques across all 22 features), summing per feature. Total
-    Feature DB ARR reconstructed: ~$7.17M.
-  - Hopper: too many customer-to-hopper joins to do via MCP practically. Plan
-    is to let the PM export/join customer ARRs in Excel and hand Claude a
-    `notion_url,arr` CSV; Claude merges into `seed.json`.
+- **Sync To Hopper** (write-back) — push planning-status, follow-up flags, and
+  scoring decisions back to Hopper rows. Same Vite proxy; needs the
+  integration's **Update content** capability (already requested above).
+- **Hopper ARR auto-merge** — fold the CSV step (`merge-hopper-arr.mjs`) into
+  the in-app sync, so ARR comes down with the rest of the row.
+- **Feature DB sync via the proxy** — replace the MCP loop with an in-app
+  button mirroring Sync From Hopper.
+- **CSV import** (currently export-only).
+- **Undo** — would let us drop the "Export JSON as a checkpoint" caveat.
 
 ## Known limitations
 
-- Single browser instance / single user — `localStorage` is not shared.
-- No undo. Use Export JSON for checkpoints.
-- CSV export is one-way (export only; no CSV import yet).
-- Hopper ARR import still needs the PM-provided CSV merge step; scripted
-  merger to follow.
-- 100-record cap on Notion queries; no pagination available in MCP.
-- Notion rollups are always omitted by MCP, so ARR rollup is reconstructed
-  via per-customer fetches.
-- No writeback to Notion (by design for this prototype).
+- **Single browser instance / single user** — `localStorage` is not shared.
+- **No undo.** Use **Export JSON** for checkpoints before risky actions.
+- **CSV is export-only** today (no CSV import).
+- **Hopper sync requires `npm run dev`** — the proxy is a dev-server feature.
+- **Workspace admin gate** — some Notion plans restrict integration creation to admins; you may need to ask the rudderstacks owner to create the integration on your behalf.
+- **Feature DB still goes through the legacy MCP path** — see roadmap.
+- **Hopper ARR backfill is still manual** via a CSV + `merge-hopper-arr.mjs`.
+- **No writeback to Notion yet** (Sync To Hopper is the next button).
 
 ## Files worth reading first if you're Claude in a future session
 
 1. This README.
-2. `src/types.ts` — authoritative schema.
-3. `scripts/build-seed.mjs` — how Notion data is mapped into the app.
-4. `src/App.tsx` — state shape, filter model.
-5. `src/components/FeatureTable.tsx` — sort, resize, inline-edit behaviors.
+2. `src/types.ts` — schema, `SCORING_KEYS`, `PlanningStatus`, `ContextKind`.
+3. `src/lib/notionSync.ts` — Hopper API client (filter, pagination) + `mergeHopperRows`.
+4. `vite.config.ts` — `/api/notion` proxy + token injection.
+5. `src/App.tsx` — top-level state, filter model, sidebar wiring.
+6. `src/components/TopBar.tsx` — KPI cards, sync card, filters, bulk actions.
+7. `src/components/FeatureTable.tsx` — column layout, inline-edit, status row dimming.
+8. `scripts/build-seed.mjs` — legacy normalizer (still used for Feature DB).
+9. `scripts/merge-hopper-arr.mjs` — Hopper ARR CSV merger.
+
+## Changelog
+
+### May 2026
+
+- **Sync From Hopper button** + Vite dev-server proxy at `/api/notion`. Token kept server-side via `loadEnv` + `proxyReq` header injection; browser bundle never sees it. Pagination via cursors removes the 100-record cap that the MCP path hit.
+- **Planning-status workflow** — `planningStatus` field (`null` / `'committed'` / `'icebox'`), Status filter, three KPI scorecards on the top bar, and dimmed-row styling for Iceboxed items.
+- **Bulk Icebox Uncommitted** — one-click move of every Reviewing row to Icebox (with confirm).
+- **Follow-up flag + inline note** — `needsFollowUp` checkbox and `followUpNote` text on every row, plus a Follow-up filter on the top bar.
+- **Left context sidebar** — `ContextCard` for Company strategies and OSTs (`ContextItem` shape, persisted as `pm-roadmap-app:strategies:v1` and `pm-roadmap-app:osts:v1`).
+- **Theme toggle** — dark/light, persisted as `pm-roadmap-app:theme:v1`. All components have `dark:` variants.
+- **Layout width resizer** — drag handle on the page's right edge; double-click to reset; persisted as `pm-roadmap-app:layoutWidth:v1` (default 2100, min 1280).
+- **`scripts/merge-hopper-arr.mjs`** — helper to merge a `notion_url,arr` CSV into `data/seed.json` for Hopper ARR backfill.
+
+### April 2026 (initial scaffold)
+
+- Scaffolded Vite + React + TS + Tailwind v3, RudderStack palette, Inter fallback for headings.
+- Schema: name, AoR, 6 booleans, ARR, computed Score. Later added a 7th boolean (Competitor Parity).
+- Top bar with AoR + Source filters, search, Load sample, Clear board, Import JSON, Export JSON, Export CSV, Add feature.
+- Sort: Score → ARR tiebreak; Score and ARR column headers clickable for per-column asc/desc.
+- UX: replaced `confirm()` popups with button tooltips for Load sample / Clear board; promoted Clear board into a proper secondary button.
+- Feature column resize: 180–900px, default 420, persisted.
+- MCP-driven Notion sync plumbing for Feature DB + Hopper, including ARR reconstruction via per-customer fetches (rollups omitted by MCP). Total Feature DB ARR reconstructed: ~$7.17M across 22 rows.
