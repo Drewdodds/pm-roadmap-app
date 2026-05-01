@@ -1,7 +1,14 @@
 export type SyncStatus =
   | { kind: 'idle' }
   | { kind: 'loading' }
-  | { kind: 'success'; total: number; added: number; skipped: number }
+  | {
+      kind: 'success';
+      total: number;
+      added: number;
+      updated: number;
+      customersAdded: number;
+      customersUpdated: number;
+    }
   | { kind: 'error'; message: string };
 
 interface Props {
@@ -47,7 +54,7 @@ export const SyncFromHopperCard = ({ status, onClick }: Props) => {
     subtitle = (
       <span className="text-primary-900 dark:text-slate-100">
         <span className="font-semibold">{status.added}</span> new ·{' '}
-        <span className="font-semibold">{status.skipped}</span> existing ·{' '}
+        <span className="font-semibold">{status.updated}</span> updated ·{' '}
         <span className="font-semibold">{status.total}</span> returned
       </span>
     );

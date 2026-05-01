@@ -4,22 +4,25 @@ import { FeatureTable } from './components/FeatureTable';
 import { AddFeatureModal } from './components/AddFeatureModal';
 import { ContextCard } from './components/ContextCard';
 import { ContextItemModal } from './components/ContextItemModal';
-import type { AoR, ContextItem, Feature, ScoringKey } from './types';
+import type { AoR, ContextItem, Customer, Feature, ScoringKey } from './types';
 import {
   DEFAULT_LAYOUT_WIDTH,
   MIN_LAYOUT_WIDTH,
+  bootstrapCustomersFromSeed,
   exportCSV,
   exportJSON,
   importJSON,
   loadContextItems,
+  loadCustomers,
   loadFeatures,
   loadLayoutWidth,
   saveContextItems,
+  saveCustomers,
   saveFeatures,
   saveLayoutWidth,
 } from './storage';
 import { sampleFeatures } from './sampleData';
-import { fetchHopperPages, mergeHopperRows } from './lib/notionSync';
+import { syncFromHopper } from './lib/notionSync';
 import type { SyncStatus } from './components/SyncFromHopperCard';
 
 type SourceFilter = 'All' | 'hopper' | 'feature' | 'manual';
@@ -28,6 +31,10 @@ type StatusFilter = 'All' | 'Reviewing' | 'Committed' | 'Icebox';
 
 export default function App() {
   const [features, setFeatures] = useState<Feature[]>(() => loadFeatures());
+  const [customers, setCustomers] = useState<Customer[]>(() => {
+    const loaded = loadCustomers();
+    return loaded.length > 0 ? loaded : bootstrapCustomersFromSeed();
+  });
   const [strategies, setStrategies] = useState<ContextItem[]>(() =>
     loadContextItems('strategies'),
   );
@@ -89,6 +96,10 @@ export default function App() {
   useEffect(() => {
     saveFeatures(features);
   }, [features]);
+
+  useEffect(() => {
+    saveCustomers(customers);
+  }, [customers]);
 
   useEffect(() => {
     saveContextItems('strategies', strategies);
@@ -207,14 +218,16 @@ export default function App() {
   const handleSyncFromHopper = async () => {
     setSyncStatus({ kind: 'loading' });
     try {
-      const rows = await fetchHopperPages();
-      const result = mergeHopperRows(features, rows);
-      setFeatures(result.merged);
+      const result = await syncFromHopper(features, customers);
+      setCustomers(result.customers);
+      setFeatures(result.features);
       setSyncStatus({
         kind: 'success',
         total: result.total,
         added: result.added,
-        skipped: result.skipped,
+        updated: result.updated,
+        customersAdded: result.customersAdded,
+        customersUpdated: result.customersUpdated,
       });
     } catch (err) {
       setSyncStatus({

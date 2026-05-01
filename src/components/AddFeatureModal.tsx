@@ -24,6 +24,7 @@ export const AddFeatureModal = ({ onClose, onAdd }: Props) => {
       source: 'manual',
       needsFollowUp: false,
       planningStatus: null,
+      customerIds: [],
     });
     onClose();
   };

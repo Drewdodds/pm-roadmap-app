@@ -1,7 +1,9 @@
-import type { ContextItem, ContextKind, Feature } from './types';
+import type { ContextItem, ContextKind, Customer, Feature } from './types';
 import { emptyScores } from './types';
+import customersSeed from '../data/customers-seed.json';
 
 const KEY = 'pm-roadmap-app:features:v1';
+const CUSTOMERS_KEY = 'pm-roadmap-app:customers:v1';
 const CONTEXT_KEYS: Record<ContextKind, string> = {
   strategies: 'pm-roadmap-app:strategies:v1',
   osts: 'pm-roadmap-app:osts:v1',
@@ -89,7 +91,38 @@ const normalize = (f: Partial<Feature>): Feature => ({
   needsFollowUp: f.needsFollowUp ?? false,
   followUpNote: f.followUpNote,
   planningStatus: (f.planningStatus as Feature['planningStatus']) ?? null,
+  customerIds: Array.isArray(f.customerIds) ? f.customerIds : [],
 });
+
+export const loadCustomers = (): Customer[] => {
+  try {
+    const raw = localStorage.getItem(CUSTOMERS_KEY);
+    if (!raw) return [];
+    const parsed = JSON.parse(raw) as Partial<Customer>[];
+    return parsed.map(normalizeCustomer);
+  } catch {
+    return [];
+  }
+};
+
+export const saveCustomers = (customers: Customer[]): void => {
+  localStorage.setItem(CUSTOMERS_KEY, JSON.stringify(customers));
+};
+
+export const bootstrapCustomersFromSeed = (): Customer[] =>
+  (customersSeed as Partial<Customer>[]).map(normalizeCustomer);
+
+const normalizeCustomer = (c: Partial<Customer>): Customer => ({
+  id: normalizeNotionId(c.id ?? ''),
+  notionUrl: c.notionUrl ?? '',
+  name: c.name ?? '(unnamed)',
+  arr: typeof c.arr === 'number' ? c.arr : 0,
+  orgId: c.orgId,
+  planType: c.planType,
+});
+
+export const normalizeNotionId = (id: string): string =>
+  id.replace(/-/g, '').toLowerCase();
 
 export const exportJSON = (features: Feature[]): void => {
   const blob = new Blob([JSON.stringify(features, null, 2)], {

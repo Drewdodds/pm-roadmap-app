@@ -37,6 +37,16 @@ export interface Feature {
   needsFollowUp: boolean;
   followUpNote?: string;
   planningStatus: PlanningStatus | null;
+  customerIds: string[];
+}
+
+export interface Customer {
+  id: string;
+  notionUrl: string;
+  name: string;
+  arr: number;
+  orgId?: string;
+  planType?: string;
 }
 
 export const emptyScores = (): Scores =>
