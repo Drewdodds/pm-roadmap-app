@@ -2,7 +2,7 @@ import type { AoR, Customer, Feature } from '../types';
 import { emptyScores } from '../types';
 import { normalizeNotionId } from '../storage';
 
-const DREW_USER_ID = 'eac00464-c24f-4d39-ae97-5576db9bc9bb';
+export const DREW_USER_ID = 'eac00464-c24f-4d39-ae97-5576db9bc9bb';
 const HOPPER_DROP_STAGES = ['Icebox', 'Duplicate', 'To Feature DB'] as const;
 const HOPPER_DB_ID = import.meta.env.VITE_NOTION_HOPPER_DB_ID as string | undefined;
 const CUSTOMER_DB_ID = import.meta.env.VITE_NOTION_CUSTOMER_DB_ID as string | undefined;
