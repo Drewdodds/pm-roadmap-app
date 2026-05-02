@@ -736,22 +736,6 @@
     "notionUrl": "https://www.notion.so/2f0f2b415dd0811ca97ded2911de328e"
   },
   {
-    "id": "db602937-d327-4ce3-99b2-59e31b6f93fc",
-    "name": "SSO Self-Serve",
-    "aor": "Application",
-    "arr": 0,
-    "scores": {
-      "is_apart_of_company_strategy": false,
-      "attached_to_company_ost": false,
-      "minimize_churn": false,
-      "operationally_critical": false,
-      "customer_ask": false,
-      "increase_arr": false
-    },
-    "source": "hopper",
-    "notionUrl": "https://www.notion.so/2eff2b415dd081eabd31e9b1f4bb1adf"
-  },
-  {
     "id": "71a4cefd-5782-4923-8e61-41a168780652",
     "name": "Sample Event Preview in Sources",
     "aor": "Application",
@@ -958,38 +942,6 @@
     },
     "source": "hopper",
     "notionUrl": "https://www.notion.so/2bef2b415dd081b5bd9af98e96ca6455"
-  },
-  {
-    "id": "ce484567-bbdf-4f10-8fe7-853fbe665c9b",
-    "name": "High volume Alert - similar to low volume alerts that we provide today.",
-    "aor": "Application",
-    "arr": 140687,
-    "scores": {
-      "is_apart_of_company_strategy": false,
-      "attached_to_company_ost": false,
-      "minimize_churn": false,
-      "operationally_critical": false,
-      "customer_ask": false,
-      "increase_arr": false
-    },
-    "source": "hopper",
-    "notionUrl": "https://www.notion.so/2bef2b415dd081d58fb1d3e16ff2a3b9"
-  },
-  {
-    "id": "5efd2473-8f1e-4915-9a07-c78b6ce84067",
-    "name": "Do not create new org/workspace when user signs up.",
-    "aor": "Application",
-    "arr": 0,
-    "scores": {
-      "is_apart_of_company_strategy": false,
-      "attached_to_company_ost": false,
-      "minimize_churn": false,
-      "operationally_critical": false,
-      "customer_ask": false,
-      "increase_arr": false
-    },
-    "source": "hopper",
-    "notionUrl": "https://www.notion.so/2bdf2b415dd0810abf76fc39b752848b"
   },
   {
     "id": "4da9ef93-1681-4aec-9c95-f339d4809cc6",
