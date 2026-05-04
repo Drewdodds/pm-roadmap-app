@@ -199,6 +199,12 @@ export function mergeCustomers(
   return { merged: Array.from(byId.values()), added, updated };
 }
 
+const pageIdFromUrl = (url: string): string => {
+  const slug = url.split('/').pop() ?? '';
+  const trailing = slug.split('-').pop() ?? slug;
+  return trailing.replace(/[^a-f0-9]/gi, '').toLowerCase();
+};
+
 export function mergeHopperRows(
   existing: Feature[],
   rows: HopperRow[],
@@ -208,10 +214,10 @@ export function mergeHopperRows(
   const aggregateArr = (ids: string[]): number =>
     ids.reduce((sum, id) => sum + (customerById.get(id)?.arr ?? 0), 0);
 
-  const byUrl = new Map(
+  const byPageId = new Map(
     existing
       .filter((f): f is Feature & { notionUrl: string } => Boolean(f.notionUrl))
-      .map((f) => [f.notionUrl, f] as const),
+      .map((f) => [pageIdFromUrl(f.notionUrl), f] as const),
   );
 
   let added = 0;
@@ -221,10 +227,11 @@ export function mergeHopperRows(
 
   for (const row of rows) {
     const aggArr = aggregateArr(row.customerIds);
-    const existingFeature = byUrl.get(row.notionUrl);
+    const existingFeature = byPageId.get(pageIdFromUrl(row.notionUrl));
     if (existingFeature) {
       updatedById.set(existingFeature.id, {
         ...existingFeature,
+        notionUrl: row.notionUrl,
         arr: aggArr,
         scores: { ...existingFeature.scores, customer_ask: row.customerIds.length > 0 },
         customerIds: row.customerIds,

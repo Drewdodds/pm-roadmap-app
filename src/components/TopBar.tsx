@@ -138,6 +138,24 @@ export const TopBar = (p: Props) => {
           <div className="ml-auto flex items-center gap-3">
             <button
               className="btn-secondary"
+              onClick={() =>
+                (
+                  window as unknown as { _importInput: HTMLInputElement }
+                )._importInput?.click()
+              }
+              title="Replace local features with the contents of a JSON file"
+            >
+              Import JSON
+            </button>
+            <button
+              className="btn-secondary"
+              onClick={p.onExportJson}
+              title="Download all features (including scoring) as a JSON file"
+            >
+              Export JSON
+            </button>
+            <button
+              className="btn-secondary"
               onClick={p.onLoadSample}
               title="Clear and board and load sample data"
             >

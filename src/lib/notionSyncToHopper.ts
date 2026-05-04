@@ -1,7 +1,4 @@
 import type { Feature } from '../types';
-import { DREW_USER_ID } from './notionSync';
-
-const HOPPER_DB_ID = import.meta.env.VITE_NOTION_HOPPER_DB_ID as string | undefined;
 
 type HopperStage = 'To Feature DB' | 'Icebox';
 
@@ -21,6 +18,7 @@ export interface SyncToHopperResult {
   iceboxed: number;
   reviewingSkipped: number;
   alreadyInFeatureDb: number;
+  manualSkippedNoLink: number;
   errors: string[];
 }
 
@@ -54,15 +52,17 @@ export function planSyncToHopper(features: Feature[]): SyncToHopperPlan {
 }
 
 export function describePlan(plan: SyncToHopperPlan): string {
+  const manualSkipped = plan.manualCommitted.length + plan.manualIcebox.length;
   const lines = [
     `Push to Notion Hopper?`,
     ``,
-    `• ${plan.manualCommitted.length} manual feature(s) → create Hopper rows (To Feature DB)`,
-    `• ${plan.manualIcebox.length} manual feature(s) → create Hopper rows (Icebox)`,
     `• ${plan.hopperCommitted.length} hopper feature(s) → mark "To Feature DB"`,
     `• ${plan.hopperIcebox.length} hopper feature(s) → mark "Icebox"`,
+    `• ${manualSkipped} skipped (manual — no Hopper page linked; create in Notion first)`,
     `• ${plan.reviewingSkipped} skipped (still Reviewing)`,
     `• ${plan.alreadyInFeatureDb} skipped (already in Feature DB)`,
+    ``,
+    `This sync only updates existing Hopper rows. It will not create anything new in Notion.`,
   ];
   return lines.join('\n');
 }
@@ -102,28 +102,12 @@ async function patchHopperStage(
   );
 }
 
-async function createHopperPage(
-  name: string,
-  stage: HopperStage,
-): Promise<NotionPageResponse> {
-  if (!HOPPER_DB_ID) throw new Error('VITE_NOTION_HOPPER_DB_ID is not set.');
-  return notionFetch<NotionPageResponse>('/pages', {
-    parent: { database_id: HOPPER_DB_ID },
-    properties: {
-      'Idea/Topic': { title: [{ text: { content: name } }] },
-      'Hopper Stages': { select: { name: stage } },
-      'Area PM': { people: [{ id: DREW_USER_ID }] },
-    },
-  });
-}
-
 export async function executeSyncToHopper(
   features: Feature[],
   plan: SyncToHopperPlan,
 ): Promise<SyncToHopperResult> {
   const updates = new Map<string, Feature>();
   const errors: string[] = [];
-  let created = 0;
   let committed = 0;
   let iceboxed = 0;
 
@@ -148,45 +132,19 @@ export async function executeSyncToHopper(
     }
   }
 
-  for (const f of plan.manualCommitted) {
-    try {
-      const hopperPage = await createHopperPage(f.name, 'To Feature DB');
-      updates.set(f.id, {
-        ...f,
-        source: 'feature',
-        notionUrl: hopperPage.url,
-      });
-      created++;
-      committed++;
-    } catch (e) {
-      errors.push(`create+commit "${f.name}": ${(e as Error).message}`);
-    }
-  }
-
-  for (const f of plan.manualIcebox) {
-    try {
-      const hopperPage = await createHopperPage(f.name, 'Icebox');
-      updates.set(f.id, {
-        ...f,
-        source: 'hopper',
-        notionUrl: hopperPage.url,
-      });
-      created++;
-      iceboxed++;
-    } catch (e) {
-      errors.push(`create+icebox "${f.name}": ${(e as Error).message}`);
-    }
-  }
+  const manualSkippedNoLink =
+    plan.manualCommitted.length + plan.manualIcebox.length;
 
   const merged = features.map((f) => updates.get(f.id) ?? f);
 
   return {
     features: merged,
-    created,
+    created: 0,
     committed,
     iceboxed,
     reviewingSkipped: plan.reviewingSkipped,
     alreadyInFeatureDb: plan.alreadyInFeatureDb,
+    manualSkippedNoLink,
     errors,
   };
 }

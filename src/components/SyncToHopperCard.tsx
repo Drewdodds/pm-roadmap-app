@@ -8,6 +8,7 @@ export type SyncToHopperStatus =
       iceboxed: number;
       reviewingSkipped: number;
       alreadyInFeatureDb: number;
+      manualSkippedNoLink: number;
     }
   | { kind: 'error'; message: string };
 
@@ -56,16 +57,16 @@ export const SyncToHopperCard = ({ status, onClick }: Props) => {
   } else if (status.kind === 'success') {
     subtitle = (
       <span className="text-primary-900 dark:text-slate-100">
-        <span className="font-semibold">{status.created}</span> created ·{' '}
         <span className="font-semibold">{status.committed}</span> committed ·{' '}
         <span className="font-semibold">{status.iceboxed}</span> iceboxed
       </span>
     );
     titleAttr =
-      `${status.created} created · ${status.committed} committed · ` +
+      `${status.committed} committed · ` +
       `${status.iceboxed} iceboxed · ` +
       `${status.reviewingSkipped} skipped (reviewing) · ` +
-      `${status.alreadyInFeatureDb} skipped (already in Feature DB)`;
+      `${status.alreadyInFeatureDb} skipped (already in Feature DB) · ` +
+      `${status.manualSkippedNoLink} skipped (manual, no Hopper page)`;
   } else if (status.kind === 'error') {
     subtitle = (
       <span className="text-red-600 dark:text-red-400" title={status.message}>
