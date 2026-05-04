@@ -248,6 +248,7 @@ export default function App() {
         iceboxed: result.iceboxed,
         reviewingSkipped: result.reviewingSkipped,
         alreadyInFeatureDb: result.alreadyInFeatureDb,
+        manualSkippedNoLink: result.manualSkippedNoLink,
       });
     } catch (err) {
       setSyncToHopperStatus({
