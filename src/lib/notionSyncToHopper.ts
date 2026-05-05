@@ -1,4 +1,5 @@
-import type { Feature } from '../types';
+import type { Feature, ScoringKey } from '../types';
+import { SCORING_KEYS, computeScore } from '../types';
 
 type HopperStage = 'To Feature DB' | 'Icebox';
 
@@ -91,6 +92,50 @@ interface NotionPageResponse {
   url: string;
 }
 
+const COMMENT_LABELS: Record<ScoringKey, string> = {
+  is_apart_of_company_strategy: 'Strategy',
+  attached_to_company_ost: 'OST',
+  minimize_churn: 'Minimize Churn',
+  operationally_critical: 'Operationally Critical',
+  customer_ask: 'Customer Ask',
+  increase_arr: 'Increase ARR',
+  competitor_parity: 'Competitor Parity',
+};
+
+interface NotionRichText {
+  type: 'text';
+  text: { content: string };
+  annotations?: { bold?: boolean };
+}
+
+function text(content: string, bold = false): NotionRichText {
+  const rt: NotionRichText = { type: 'text', text: { content } };
+  if (bold) rt.annotations = { bold: true };
+  return rt;
+}
+
+function buildScoringComment(f: Feature, committed: boolean): NotionRichText[] {
+  const check = (b: boolean) => (b ? '✅' : '❌');
+  const lines: NotionRichText[] = [text('Scoring', true)];
+  for (const k of SCORING_KEYS) {
+    lines.push(text(`\n${COMMENT_LABELS[k]}: ${check(f.scores[k])}`));
+  }
+  lines.push(text(`\nTotal Score: ${computeScore(f.scores)}`));
+  lines.push(text(`\nARR: $${f.arr.toLocaleString('en-US')}`));
+  lines.push(text(`\nCommitted: ${check(committed)}`));
+  return lines;
+}
+
+async function postHopperComment(
+  pageId: string,
+  richText: NotionRichText[],
+): Promise<void> {
+  await notionFetch<unknown>('/comments', {
+    parent: { page_id: pageId },
+    rich_text: richText,
+  });
+}
+
 async function patchHopperStage(
   pageId: string,
   stage: HopperStage,
@@ -114,9 +159,15 @@ export async function executeSyncToHopper(
   for (const f of plan.hopperCommitted) {
     try {
       if (!f.notionUrl) throw new Error(`"${f.name}" has no notionUrl`);
-      await patchHopperStage(pageIdFromUrl(f.notionUrl), 'To Feature DB');
+      const pageId = pageIdFromUrl(f.notionUrl);
+      await patchHopperStage(pageId, 'To Feature DB');
       updates.set(f.id, { ...f, source: 'feature' });
       committed++;
+      try {
+        await postHopperComment(pageId, buildScoringComment(f, true));
+      } catch (e) {
+        errors.push(`comment "${f.name}": ${(e as Error).message}`);
+      }
     } catch (e) {
       errors.push(`commit "${f.name}": ${(e as Error).message}`);
     }
@@ -125,8 +176,14 @@ export async function executeSyncToHopper(
   for (const f of plan.hopperIcebox) {
     try {
       if (!f.notionUrl) throw new Error(`"${f.name}" has no notionUrl`);
-      await patchHopperStage(pageIdFromUrl(f.notionUrl), 'Icebox');
+      const pageId = pageIdFromUrl(f.notionUrl);
+      await patchHopperStage(pageId, 'Icebox');
       iceboxed++;
+      try {
+        await postHopperComment(pageId, buildScoringComment(f, false));
+      } catch (e) {
+        errors.push(`comment "${f.name}": ${(e as Error).message}`);
+      }
     } catch (e) {
       errors.push(`icebox "${f.name}": ${(e as Error).message}`);
     }
